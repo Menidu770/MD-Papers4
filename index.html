@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MD Papers — Sri Lanka Education</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+    --bg:#f6f7fb;
+    --card:#ffffff;
+    --text:#101828;
+    --muted:#667085;
+    --line:#e5e7eb;
+    --primary:#635bff;
+    --primary2:#8b5cf6;
+    --danger:#ef4444;
+    --success:#16a34a;
+}
+
+.dark{
+    --bg:#080b14;
+    --card:#111827;
+    --text:#f8fafc;
+    --muted:#98a2b3;
+    --line:#273244;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.25s;
+}
+
+button,input,select{font-family:inherit}
+
+button{cursor:pointer}
+
+a{text-decoration:none;color:inherit}
+
+/* NAVBAR */
+
+.navbar{
+    height:74px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(255,255,255,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--line);
+}
+
+.dark .navbar{
+    background:rgba(8,11,20,.85);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    color:var(--primary);
+    letter-spacing:-1px;
+}
+
+.logo span{color:var(--text)}
+
+.navlinks{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.navlinks a{
+    color:var(--muted);
+    font-size:13px;
+    font-weight:700;
+}
+
+.navlinks a:hover{color:var(--primary)}
+
+.navbuttons{
+    display:flex;
+    gap:8px;
+}
+
+.iconbtn{
+    width:40px;
+    height:40px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--card);
+    color:var(--text);
+    font-size:17px;
+}
+
+.menu{display:none}
+
+/* HERO */
+
+.hero{
+    min-height:570px;
+    padding:80px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:50px;
+
+    background:
+        radial-gradient(circle at 85% 15%,#635bff22,transparent 30%),
+        radial-gradient(circle at 10% 80%,#8b5cf622,transparent 30%);
+}
+
+.heroText{max-width:690px}
+
+.badge{
+    display:inline-block;
+    padding:8px 13px;
+    border-radius:30px;
+    background:#635bff14;
+    color:var(--primary);
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(44px,6vw,74px);
+    line-height:1.02;
+    letter-spacing:-4px;
+}
+
+.gradient{
+    background:linear-gradient(90deg,var(--primary),var(--primary2));
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    color:var(--muted);
+    line-height:1.7;
+    max-width:590px;
+    margin-top:20px;
+    font-size:15px;
+}
+
+.heroButtons{
+    display:flex;
+    gap:10px;
+    margin-top:28px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    border:0;
+    border-radius:13px;
+    padding:13px 19px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.btn:hover{transform:translateY(-3px)}
+
+.primary{
+    color:white;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    box-shadow:0 10px 25px #635bff30;
+}
+
+.secondary{
+    color:var(--text);
+    background:var(--card);
+    border:1px solid var(--line);
+}
+
+/* HERO PREVIEW */
+
+.preview{
+    width:365px;
+    padding:22px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:27px;
+    box-shadow:0 25px 70px #00000012;
+}
+
+.previewHead{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+    font-size:13px;
+    font-weight:800;
+}
+
+.live{
+    padding:5px 9px;
+    border-radius:20px;
+    background:#dcfce7;
+    color:#15803d;
+    font-size:9px;
+}
+
+.previewCard{
+    background:var(--bg);
+    padding:17px;
+    border-radius:17px;
+    margin-top:10px;
+}
+
+.previewCard small{color:var(--muted)}
+
+.previewCard h3{
+    margin-top:7px;
+    font-size:14px;
+}
+
+.progress{
+    height:7px;
+    background:var(--line);
+    border-radius:20px;
+    margin-top:12px;
+}
+
+.progress i{
+    display:block;
+    width:75%;
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(90deg,var(--primary),var(--primary2));
+}
+
+/* STATS */
+
+.stats{
+    padding:0 7%;
+    margin-top:-35px;
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    padding:22px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:19px;
+    box-shadow:0 15px 45px #0000000b;
+}
+
+.stat h2{font-size:27px}
+
+.stat p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
+}
+
+/* SECTIONS */
+
+section{padding:85px 7%}
+
+.sectionHead{margin-bottom:30px}
+
+.sectionHead h2{
+    font-size:32px;
+    letter-spacing:-1px;
+}
+
+.sectionHead p{
+    color:var(--muted);
+    margin-top:7px;
+}
+
+/* SEARCH */
+
+.searchBox{
+    padding:16px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:9px;
+}
+
+.input,select{
+    width:100%;
+    padding:13px;
+    border:1px solid var(--line);
+    border-radius:11px;
+    outline:0;
+    background:var(--bg);
+    color:var(--text);
+}
+
+.input:focus,select:focus{
+    border-color:var(--primary);
+}
+
+/* PAPERS */
+
+.paperGrid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:25px;
+}
+
+.paper{
+    padding:20px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:21px;
+    transition:.25s;
+}
+
+.paper:hover{
+    transform:translateY(-5px);
+    box-shadow:0 20px 50px #0000000d;
+}
+
+.paperTop{
+    display:flex;
+    justify-content:space-between;
+}
+
+.pdfIcon{
+    width:46px;
+    height:46px;
+    display:grid;
+    place-items:center;
+    border-radius:13px;
+    background:#fff1f2;
+    color:#e11d48;
+    font-size:10px;
+    font-weight:900;
+}
+
+.year{
+    height:max-content;
+    padding:6px 10px;
+    border-radius:20px;
+    background:#635bff14;
+    color:var(--primary);
+    font-size:10px;
+    font-weight:800;
+}
+
+.paper h3{
+    font-size:16px;
+    margin-top:17px;
+}
+
+.paper p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:6px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin:15px 0;
+}
+
+.tag{
+    padding:6px 8px;
+    border-radius:7px;
+    background:var(--bg);
+    color:var(--muted);
+    font-size:9px;
+}
+
+.paperActions{
+    display:flex;
+    gap:7px;
+}
+
+.paperActions button{
+    flex:1;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:var(--card);
+    color:var(--text);
+    font-weight:700;
+}
+
+.paperActions .view{
+    background:var(--primary);
+    color:white;
+    border:0;
+}
+
+.paperActions .delete{
+    color:var(--danger);
+}
+
+/* EMPTY */
+
+.empty{
+    grid-column:1/-1;
+    text-align:center;
+    padding:60px 20px;
+    color:var(--muted);
+    background:var(--card);
+    border:1px dashed var(--line);
+    border-radius:20px;
+}
+
+/* CATEGORIES */
+
+.categoryGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.category{
+    padding:22px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:19px;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-5px);
+    border-color:var(--primary);
+}
+
+.categoryIcon{
+    font-size:25px;
+    margin-bottom:12px;
+}
+
+.category h3{font-size:15px}
+
+.category p{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:5px;
+}
+
+/* COUNTDOWN */
+
+.countdownBox{
+    padding:45px;
+    color:white;
+    border-radius:29px;
+    background:linear-gradient(135deg,#111936,#392475);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+}
+
+.countdownBox p{
+    color:#c4c9dc;
+    margin-top:8px;
+}
+
+.countdown{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.time{
+    min-width:76px;
+    padding:14px 10px;
+    border-radius:14px;
+    text-align:center;
+    background:#ffffff12;
+    border:1px solid #ffffff14;
+}
+
+.time strong{
+    display:block;
+    font-size:25px;
+}
+
+.time span{
+    color:#c3c8db;
+    font-size:8px;
+}
+
+/* ADMIN */
+
+.adminBox{
+    max-width:800px;
+    margin:auto;
+    padding:30px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:25px;
+}
+
+.formGrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.formGroup label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+.full{grid-column:1/-1}
+
+.fileDrop{
+    padding:25px;
+    border:2px dashed var(--line);
+    border-radius:17px;
+    text-align:center;
+}
+
+.fileDrop input{
+    margin-top:12px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:40px 7%;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:5000;
+    background:#000b;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modalBox{
+    width:1000px;
+    height:90vh;
+    max-width:100%;
+    background:var(--card);
+    border-radius:20px;
+    overflow:hidden;
+    position:relative;
+}
+
+.modalHead{
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 17px;
+    border-bottom:1px solid var(--line);
+}
+
+.close{
+    width:35px;
+    height:35px;
+    border:0;
+    border-radius:9px;
+    background:var(--bg);
+    color:var(--text);
+    font-size:20px;
+}
+
+#pdfViewer{
+    width:100%;
+    height:calc(100% - 55px);
+    border:0;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:9000;
+    padding:13px 17px;
+    border-radius:12px;
+    background:#111827;
+    color:white;
+    transform:translateY(80px);
+    opacity:0;
+    transition:.3s;
+    font-size:12px;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+    .navlinks{
+        display:none;
+        position:absolute;
+        top:74px;
+        left:0;
+        right:0;
+        padding:20px;
+        background:var(--card);
+        flex-direction:column;
+        border-bottom:1px solid var(--line);
+    }
+
+    .navlinks.active{display:flex}
+
+    .menu{display:block}
+
+    .hero{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .preview{
+        width:100%;
+        max-width:370px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .paperGrid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .categoryGrid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .countdownBox{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+
+@media(max-width:600px){
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .stats,
+    .paperGrid,
+    .categoryGrid{
+        grid-template-columns:1fr;
+    }
+
+    .searchBox{
+        grid-template-columns:1fr;
+    }
+
+    .formGrid{
+        grid-template-columns:1fr;
+    }
+
+    .full{
+        grid-column:auto;
+    }
+
+    footer{
+        flex-direction:column;
+        gap:12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        MD <span>Papers</span>
+    </div>
+
+    <ul class="navlinks" id="navlinks">
+
+        <li><a href="#home">Home</a></li>
+        <li><a href="#papers">Past Papers</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#countdown">Countdown</a></li>
+        <li><a href="#admin">Admin</a></li>
+
+    </ul>
+
+    <div class="navbuttons">
+
+        <button class="iconbtn" onclick="toggleDark()">◐</button>
+
+        <button class="iconbtn menu"
+                onclick="toggleMenu()">☰</button>
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="heroText">
+
+        <span class="badge">
+            🇱🇰 Sri Lankan Student Platform
+        </span>
+
+        <h1>
+            Find Papers.<br>
+            <span class="gradient">
+                Prepare Better.
+            </span>
+        </h1>
+
+        <p>
+            MD Papers brings past papers, model papers,
+            marking schemes and educational resources
+            together in one modern platform.
+        </p>
+
+        <div class="heroButtons">
+
+            <a href="#papers">
+                <button class="btn primary">
+                    Explore Papers →
+                </button>
+            </a>
+
+            <a href="#categories">
+                <button class="btn secondary">
+                    Browse Categories
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="preview">
+
+        <div class="previewHead">
+            <span>MD Papers</span>
+            <span class="live">● LIVE</span>
+        </div>
+
+        <div class="previewCard">
+
+            <small>O/L Mathematics</small>
+
+            <h3>2025 Past Paper</h3>
+
+            <div class="progress">
+                <i></i>
+            </div>
+
+        </div>
+
+        <div class="previewCard">
+
+            <small>Grade 11 Science</small>
+
+            <h3>3rd Term Test Paper</h3>
+
+        </div>
+
+        <div class="previewCard">
+
+            <small>Upcoming</small>
+
+            <h3>O/L Examination</h3>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="stat">
+        <h2 id="paperCount">0</h2>
+        <p>Uploaded Papers</p>
+    </div>
+
+    <div class="stat">
+        <h2>20+</h2>
+        <p>Subjects</p>
+    </div>
+
+    <div class="stat">
+        <h2>1–13</h2>
+        <p>Grades</p>
+    </div>
+
+    <div class="stat">
+        <h2>100%</h2>
+        <p>Free Access</p>
+    </div>
+
+</div>
+
+
+<!-- PAPERS -->
+
+<section id="papers">
+
+    <div class="sectionHead">
+
+        <h2>Past Papers</h2>
+
+        <p>
+            Search and browse your uploaded papers.
+        </p>
+
+    </div>
+
+
+    <div class="searchBox">
+
+        <input
+            id="search"
+            class="input"
+            placeholder="🔎 Search papers..."
+            oninput="renderPapers()"
+        >
+
+        <select id="filterSubject"
+                onchange="renderPapers()">
+
+            <option value="">All Subjects</option>
+            <option>Science</option>
+            <option>Mathematics</option>
+            <option>ICT</option>
+            <option>History</option>
+            <option>English</option>
+            <option>Sinhala</option>
+
+        </select>
+
+
+        <select id="filterGrade"
+                onchange="renderPapers()">
+
+            <option value="">All Grades</option>
+            <option>Grade 5</option>
+            <option>Grade 6</option>
+            <option>Grade 7</option>
+            <option>Grade 8</option>
+            <option>Grade 9</option>
+            <option>Grade 10</option>
+            <option>Grade 11</option>
+            <option>O/L</option>
+            <option>A/L</option>
+
+        </select>
+
+
+        <select id="filterYear"
+                onchange="renderPapers()">
+
+            <option value="">All Years</option>
+            <option>2026</option>
+            <option>2025</option>
+            <option>2024</option>
+            <option>2023</option>
+
+        </select>
+
+    </div>
+
+
+    <div class="paperGrid"
+         id="paperGrid"></div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section id="categories">
+
+    <div class="sectionHead">
+
+        <h2>Browse Categories</h2>
+
+        <p>
+            Quickly find the resources you need.
+        </p>
+
+    </div>
+
+
+    <div class="categoryGrid">
+
+        <div class="category">
+            <div class="categoryIcon">🎓</div>
+            <h3>G.C.E. O/L</h3>
+            <p>Past Papers & Marking Schemes</p>
+        </div>
+
+        <div class="category">
+            <div class="categoryIcon">🏫</div>
+            <h3>G.C.E. A/L</h3>
+            <p>Advanced Level Papers</p>
+        </div>
+
+        <div class="category">
+            <div class="categoryIcon">📚</div>
+            <h3>Grade 1–13</h3>
+            <p>School Term Test Papers</p>
+        </div>
+
+        <div class="category">
+            <div class="categoryIcon">⭐</div>
+            <h3>Scholarship</h3>
+            <p>Grade 5 Resources</p>
+        </div>
+
+        <div class="category">
+            <div class="categoryIcon">📝</div>
+            <h3>Model Papers</h3>
+            <p>Practice Questions</p>
+        </div>
+
+        <div class="category">
+            <div class="categoryIcon">✅</div>
+            <h3>Marking Schemes</h3>
+            <p>Answers & Schemes</p>
+        </div>
+
+        <div class="category">
+            <div class="categoryIcon">📖</div>
+            <h3>Short Notes</h3>
+            <p>Study Materials</p>
+        </div>
+
+        <div class="category">
+            <div class="categoryIcon">🔥</div>
+            <h3>Popular Papers</h3>
+            <p>Most viewed resources</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COUNTDOWN -->
+
+<section id="countdown">
+
+    <div class="countdownBox">
+
+        <div>
+
+            <h2>
+                ⏳ O/L Examination Countdown
+            </h2>
+
+            <p>
+                Keep track of your examination date.
+            </p>
+
+        </div>
+
+
+        <div class="countdown">
+
+            <div class="time">
+                <strong id="days">00</strong>
+                <span>DAYS</span>
+            </div>
+
+            <div class="time">
+                <strong id="hours">00</strong>
+                <span>HOURS</span>
+            </div>
+
+            <div class="time">
+                <strong id="minutes">00</strong>
+                <span>MINUTES</span>
+            </div>
+
+            <div class="time">
+                <strong id="seconds">00</strong>
+                <span>SECONDS</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="admin">
+
+    <div class="sectionHead"
+         style="text-align:center">
+
+        <h2>📤 Upload Past Paper</h2>
+
+        <p>
+            Select a PDF and add it to MD Papers.
+        </p>
+
+    </div>
+
+
+    <div class="adminBox">
+
+        <div class="formGrid">
+
+
+            <div class="formGroup">
+
+                <label>
+                    Paper Title
+                </label>
+
+                <input
+                    id="paperTitle"
+                    class="input"
+                    placeholder="Example: Grade 11 Science 2026">
+
+            </div>
+
+
+            <div class="formGroup">
+
+                <label>
+                    Subject
+                </label>
+
+                <select id="paperSubject">
+
+                    <option>Science</option>
+                    <option>Mathematics</option>
+                    <option>ICT</option>
+                    <option>History</option>
+                    <option>English</option>
+                    <option>Sinhala</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="formGroup">
+
+                <label>
+                    Grade
+                </label>
+
+                <select id="paperGrade">
+
+                    <option>Grade 5</option>
+                    <option>Grade 6</option>
+                    <option>Grade 7</option>
+                    <option>Grade 8</option>
+                    <option>Grade 9</option>
+                    <option>Grade 10</option>
+                    <option>Grade 11</option>
+                    <option>O/L</option>
+                    <option>A/L</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="formGroup">
+
+                <label>
+                    Year
+                </label>
+
+                <input
+                    id="paperYear"
+                    class="input"
+                    type="number"
+                    value="2026">
+
+            </div>
+
+
+            <div class="formGroup full">
+
+                <label>
+                    PDF File
+                </label>
+
+                <div class="fileDrop">
+
+                    <div style="font-size:30px">
+                        📄
+                    </div>
+
+                    <div style="
+                        margin-top:8px;
+                        color:var(--muted);
+                        font-size:12px;
+                    ">
+                        Select your PDF file
+                    </div>
+
+                    <input
+                        id="pdfFile"
+                        type="file"
+                        accept="application/pdf">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="btn primary"
+            style="width:100%;margin-top:17px"
+            onclick="addPaper()">
+
+            ⬆ Add PDF to MD Papers
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div>
+
+        <b style="
+            color:var(--primary);
+            font-size:18px;
+        ">
+            MD Papers
+        </b>
+
+        <br>
+
+        Learn • Practice • Succeed
+
+    </div>
+
+    <div>
+        © 2026 MD Papers
+    </div>
+
+</footer>
+
+
+<!-- PDF VIEWER -->
+
+<div class="modal"
+     id="viewerModal">
+
+    <div class="modalBox">
+
+        <div class="modalHead">
+
+            <strong id="viewerTitle">
+                PDF Viewer
+            </strong>
+
+            <button
+                class="close"
+                onclick="closeViewer()">
+
+                ×
+
+            </button>
+
+        </div>
+
+        <iframe id="pdfViewer"></iframe>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast"
+     id="toast">
+</div>
+
+
+<script>
+
+/* =========================================================
+   MD PAPERS
+   LOCAL PDF DATABASE
+   ========================================================= */
+
+let papers = [];
+
+/*
+   IndexedDB is used instead of localStorage because
+   localStorage is not suitable for storing PDF files.
+*/
+
+const DB_NAME = "MD_PAPERS_DATABASE";
+const STORE_NAME = "papers";
+
+let db;
+
+
+/* OPEN DATABASE */
+
+function openDatabase(){
+
+    return new Promise((resolve,reject)=>{
+
+        const request =
+            indexedDB.open(DB_NAME,1);
+
+
+        request.onupgradeneeded = function(e){
+
+            const database = e.target.result;
+
+            if(!database.objectStoreNames.contains(STORE_NAME)){
+
+                database.createObjectStore(
+                    STORE_NAME,
+                    {keyPath:"id",autoIncrement:true}
+                );
+
+            }
+
+        };
+
+
+        request.onsuccess = function(e){
+
+            db=e.target.result;
+            resolve(db);
+
+        };
+
+
+        request.onerror = function(){
+
+            reject(request.error);
+
+        };
+
+    });
+
+}
+
+
+/* LOAD PAPERS */
+
+function loadPapers(){
+
+    return new Promise((resolve,reject)=>{
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readonly"
+            );
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+        const request =
+            store.getAll();
+
+
+        request.onsuccess=function(){
+
+            papers=request.result || [];
+
+            resolve();
+
+        };
+
+
+        request.onerror=function(){
+
+            reject(request.error);
+
+        };
+
+    });
+
+}
+
+
+/* SAVE PAPER */
+
+function savePaper(paper){
+
+    return new Promise((resolve,reject)=>{
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readwrite"
+            );
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+        const request =
+            store.add(paper);
+
+
+        request.onsuccess=function(){
+
+            paper.id=request.result;
+
+            resolve(paper);
+
+        };
+
+
+        request.onerror=function(){
+
+            reject(request.error);
+
+        };
+
+    });
+
+}
+
+
+/* DELETE PAPER */
+
+function deletePaper(id){
+
+    return new Promise((resolve,reject)=>{
+
+        const transaction =
+            db.transaction(
+                STORE_NAME,
+                "readwrite"
+            );
+
+        const store =
+            transaction.objectStore(
+                STORE_NAME
+            );
+
+        const request =
+            store.delete(id);
+
+
+        request.onsuccess=resolve;
+
+        request.onerror=function(){
+
+            reject(request.error);
+
+        };
+
+    });
+
+}
+
+
+/* ADD PAPER */
+
+async function addPaper(){
+
+    const title =
+        document
+        .getElementById("paperTitle")
+        .value
+        .trim();
+
+
+    const subject =
+        document
+        .getElementById("paperSubject")
+        .value;
+
+
+    const grade =
+        document
+        .getElementById("paperGrade")
+        .value;
+
+
+    const year =
+        document
+        .getElementById("paperYear")
+        .value;
+
+
+    const file =
+        document
+        .getElementById("pdfFile")
+        .files[0];
+
+
+    if(!title){
+
+        showToast(
+            "Please enter a paper title."
+        );
+
+        return;
+
+    }
+
+
+    if(!file){
+
+        showToast(
+            "Please select a PDF."
+        );
+
+        return;
+
+    }
+
+
+    if(file.type !== "application/pdf"){
+
+        showToast(
+            "Only PDF files are allowed."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Convert the PDF to ArrayBuffer so IndexedDB
+       can store the actual PDF.
+    */
+
+    const buffer =
+        await file.arrayBuffer();
+
+
+    const paper={
+
+        title:title,
+
+        subject:subject,
+
+        grade:grade,
+
+        year:year,
+
+        filename:file.name,
+
+        size:file.size,
+
+        type:"application/pdf",
+
+        data:buffer,
+
+        createdAt:Date.now()
+
+    };
+
+
+    try{
+
+        await savePaper(paper);
+
+        document
+        .getElementById("paperTitle")
+        .value="";
+
+
+        document
+        .getElementById("pdfFile")
+        .value="";
+
+
+        await loadPapers();
+
+        renderPapers();
+
+        showToast(
+            "✓ PDF uploaded successfully!"
+        );
+
+
+        document
+        .getElementById("papers")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Could not save the PDF."
+        );
+
+    }
+
+}
+
+
+/* RENDER PAPERS */
+
+function renderPapers(){
+
+    const grid =
+        document
+        .getElementById("paperGrid");
+
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase();
+
+
+    const subject =
+        document
+        .getElementById("filterSubject")
+        .value;
+
+
+    const grade =
+        document
+        .getElementById("filterGrade")
+        .value;
+
+
+    const year =
+        document
+        .getElementById("filterYear")
+        .value;
+
+
+    const filtered =
+        papers.filter(p=>{
+
+            const text =
+                (
+                    p.title+" "+
+                    p.subject+" "+
+                    p.grade+" "+
+                    p.year
+                ).toLowerCase();
+
+
+            return (
+
+                text.includes(search) &&
+
+                (!subject ||
+                 p.subject===subject) &&
+
+                (!grade ||
+                 p.grade===grade) &&
+
+                (!year ||
+                 String(p.year)===String(year))
+
+            );
+
+        });
+
+
+    if(filtered.length===0){
+
+        grid.innerHTML=`
+
+            <div class="empty">
+
+                <div style="font-size:40px">
+                    📂
+                </div>
+
+                <h3 style="margin-top:10px">
+                    No papers found
+                </h3>
+
+                <p style="margin-top:6px">
+                    Upload a PDF from the Admin section.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+    else{
+
+        grid.innerHTML =
+            filtered.map(p=>paperHTML(p))
+            .join("");
+
+    }
+
+
+    document
+    .getElementById("paperCount")
+    .innerText= papers.length;
+
+}
+
+
+/* PAPER CARD */
+
+function paperHTML(p){
+
+    return `
+
+        <article class="paper">
+
+            <div class="paperTop">
+
+                <div class="pdfIcon">
+                    PDF
+                </div>
+
+                <div class="year">
+                    ${escapeHTML(p.year)}
+                </div>
+
+            </div>
+
+
+            <h3>
+                ${escapeHTML(p.title)}
+            </h3>
+
+
+            <p>
+                ${escapeHTML(p.subject)}
+                •
+                ${escapeHTML(p.grade)}
+            </p>
+
+
+            <div class="tags">
+
+                <span class="tag">
+                    ${escapeHTML(p.subject)}
+                </span>
+
+                <span class="tag">
+                    ${escapeHTML(p.grade)}
+                </span>
+
+                <span class="tag">
+                    ${escapeHTML(p.year)}
+                </span>
+
+            </div>
+
+
+            <div class="paperActions">
+
+                <button
+                    class="view"
+                    onclick="viewPDF(${p.id})">
+
+                    View
+
+                </button>
+
+
+                <button
+                    onclick="downloadPDF(${p.id})">
+
+                    Download
+
+                </button>
+
+
+                <button
+                    class="delete"
+                    onclick="removePaper(${p.id})">
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* VIEW PDF */
+
+function viewPDF(id){
+
+    const paper =
+        papers.find(
+            p=>p.id===id
+        );
+
+
+    if(!paper)return;
+
+
+    const blob =
+        new Blob(
+            [paper.data],
+            {type:"application/pdf"}
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    document
+    .getElementById("viewerTitle")
+    .innerText=paper.title;
+
+
+    document
+    .getElementById("pdfViewer")
+    .src=url;
+
+
+    document
+    .getElementById("viewerModal")
+    .style.display="flex";
+
+
+}
+
+
+/* CLOSE VIEWER */
+
+function closeViewer(){
+
+    const iframe =
+        document
+        .getElementById("pdfViewer");
+
+
+    iframe.src="";
+
+
+    document
+    .getElementById("viewerModal")
+    .style.display="none";
+
+}
+
+
+/* DOWNLOAD PDF */
+
+function downloadPDF(id){
+
+    const paper =
+        papers.find(
+            p=>p.id===id
+        );
+
+
+    if(!paper)return;
+
+
+    const blob =
+        new Blob(
+            [paper.data],
+            {type:"application/pdf"}
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const a =
+        document.createElement("a");
+
+
+    a.href=url;
+
+    a.download =
+        paper.filename ||
+        paper.title+".pdf";
+
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+
+    setTimeout(
+        ()=>URL.revokeObjectURL(url),
+        1000
+    );
+
+}
+
+
+/* DELETE */
+
+async function removePaper(id){
+
+    const paper =
+        papers.find(
+            p=>p.id===id
+        );
+
+
+    if(!paper)return;
+
+
+    const yes =
+        confirm(
+            "Delete this paper?\n\n"+
+            paper.title
+        );
+
+
+    if(!yes)return;
+
+
+    await deletePaper(id);
+
+    await loadPapers();
+
+    renderPapers();
+
+    showToast(
+        "Paper deleted."
+    );
+
+}
+
+
+/* ESCAPE HTML */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* DARK MODE */
+
+function toggleDark(){
+
+    document
+    .body
+    .classList
+    .toggle("dark");
+
+
+    localStorage.setItem(
+        "mdDark",
+        document
+        .body
+        .classList
+        .contains("dark")
+    );
+
+}
+
+
+if(
+    localStorage.getItem("mdDark")
+    ==="true"
+){
+
+    document
+    .body
+    .classList
+    .add("dark");
+
+}
+
+
+/* MOBILE MENU */
+
+function toggleMenu(){
+
+    document
+    .getElementById("navlinks")
+    .classList
+    .toggle("active");
+
+}
+
+
+/* COUNTDOWN */
+
+const examDate =
+    new Date(
+        "December 15, 2026 08:00:00"
+    ).getTime();
+
+
+function updateCountdown(){
+
+    const distance =
+        examDate-Date.now();
+
+
+    if(distance<=0){
+
+        ["days","hours","minutes","seconds"]
+        .forEach(id=>{
+            document
+            .getElementById(id)
+            .innerText="00";
+        });
+
+        return;
+
+    }
+
+
+    document
+    .getElementById("days")
+    .innerText =
+        String(
+            Math.floor(
+                distance/86400000
+            )
+        ).padStart(2,"0");
+
+
+    document
+    .getElementById("hours")
+    .innerText =
+        String(
+            Math.floor(
+                distance%86400000/3600000
+            )
+        ).padStart(2,"0");
+
+
+    document
+    .getElementById("minutes")
+    .innerText =
+        String(
+            Math.floor(
+                distance%3600000/60000
+            )
+        ).padStart(2,"0");
+
+
+    document
+    .getElementById("seconds")
+    .innerText =
+        String(
+            Math.floor(
+                distance%60000/1000
+            )
+        ).padStart(2,"0");
+
+}
+
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+updateCountdown();
+
+
+/* TOAST */
+
+function showToast(message){
+
+    const toast =
+        document
+        .getElementById("toast");
+
+
+    toast.innerText=message;
+
+    toast.classList.add("show");
+
+
+    setTimeout(
+        ()=>{
+            toast.classList.remove("show");
+        },
+        3000
+    );
+
+}
+
+
+/* INITIALIZE */
+
+(async function(){
+
+    try{
+
+        await openDatabase();
+
+        await loadPapers();
+
+        renderPapers();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Browser storage could not be opened."
+        );
+
+    }
+
+})();
+
+</script>
+
+</body>
+</html>
