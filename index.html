@@ -3,610 +3,371 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MD Papers — Sri Lanka Education</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-*{margin:0;padding:0;box-sizing:border-box}
-
 :root{
-    --bg:#f6f7fb;
-    --card:#ffffff;
-    --text:#101828;
-    --muted:#667085;
-    --line:#e5e7eb;
-    --primary:#635bff;
-    --primary2:#8b5cf6;
-    --danger:#ef4444;
-    --success:#16a34a;
-}
-
-.dark{
-    --bg:#080b14;
+    --bg:#070914;
     --card:#111827;
+    --card2:#151d31;
     --text:#f8fafc;
-    --muted:#98a2b3;
-    --line:#273244;
+    --muted:#94a3b8;
+    --primary:#6d5dfc;
+    --primary2:#8b5cf6;
+    --border:#263247;
+    --success:#22c55e;
+    --danger:#ef4444;
 }
 
-html{scroll-behavior:smooth}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     font-family:Inter,Arial,sans-serif;
     background:var(--bg);
     color:var(--text);
-    transition:.25s;
+    min-height:100vh;
 }
 
-button,input,select{font-family:inherit}
+button,input,select{
+    font:inherit;
+}
 
-button{cursor:pointer}
-
-a{text-decoration:none;color:inherit}
-
-/* NAVBAR */
+button{
+    cursor:pointer;
+}
 
 .navbar{
-    height:74px;
     position:sticky;
     top:0;
     z-index:1000;
+    height:70px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     padding:0 6%;
-    background:rgba(255,255,255,.82);
-    backdrop-filter:blur(18px);
-    border-bottom:1px solid var(--line);
-}
-
-.dark .navbar{
-    background:rgba(8,11,20,.85);
+    background:rgba(7,9,20,.92);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
 }
 
 .logo{
-    font-size:25px;
-    font-weight:800;
-    color:var(--primary);
-    letter-spacing:-1px;
+    font-size:27px;
+    font-weight:900;
 }
 
-.logo span{color:var(--text)}
+.logo span{
+    color:#7667ff;
+}
 
 .navlinks{
     display:flex;
-    gap:25px;
-    list-style:none;
+    gap:28px;
 }
 
 .navlinks a{
     color:var(--muted);
-    font-size:13px;
+    text-decoration:none;
     font-weight:700;
 }
 
-.navlinks a:hover{color:var(--primary)}
-
-.navbuttons{
-    display:flex;
-    gap:8px;
+.navlinks a:hover{
+    color:white;
 }
 
-.iconbtn{
-    width:40px;
-    height:40px;
-    border:1px solid var(--line);
-    border-radius:12px;
+.theme{
+    width:42px;
+    height:42px;
+    border:1px solid var(--border);
+    border-radius:14px;
     background:var(--card);
-    color:var(--text);
-    font-size:17px;
+    color:white;
 }
-
-.menu{display:none}
-
-/* HERO */
 
 .hero{
-    min-height:570px;
-    padding:80px 7%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:50px;
-
-    background:
-        radial-gradient(circle at 85% 15%,#635bff22,transparent 30%),
-        radial-gradient(circle at 10% 80%,#8b5cf622,transparent 30%);
-}
-
-.heroText{max-width:690px}
-
-.badge{
-    display:inline-block;
-    padding:8px 13px;
-    border-radius:30px;
-    background:#635bff14;
-    color:var(--primary);
-    font-size:11px;
-    font-weight:800;
-    margin-bottom:18px;
+    padding:80px 6% 50px;
+    text-align:center;
 }
 
 .hero h1{
-    font-size:clamp(44px,6vw,74px);
-    line-height:1.02;
-    letter-spacing:-4px;
+    font-size:clamp(42px,7vw,78px);
+    line-height:1;
+    margin-bottom:20px;
 }
 
-.gradient{
-    background:linear-gradient(90deg,var(--primary),var(--primary2));
-    -webkit-background-clip:text;
-    color:transparent;
+.hero h1 span{
+    color:#7567ff;
 }
 
 .hero p{
     color:var(--muted);
-    line-height:1.7;
-    max-width:590px;
-    margin-top:20px;
-    font-size:15px;
+    font-size:18px;
 }
 
-.heroButtons{
+.container{
+    width:min(1150px,92%);
+    margin:auto;
+}
+
+.countdown{
+    margin:30px auto 70px;
+    padding:30px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#241d66,#3b267d);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.countdown h2{
+    font-size:27px;
+}
+
+.countdown p{
+    color:#d5d8ff;
+    margin-top:8px;
+}
+
+.timer{
     display:flex;
     gap:10px;
-    margin-top:28px;
-    flex-wrap:wrap;
 }
 
-.btn{
-    border:0;
-    border-radius:13px;
-    padding:13px 19px;
-    font-weight:800;
-    transition:.2s;
+.timebox{
+    min-width:85px;
+    padding:15px 10px;
+    text-align:center;
+    border-radius:16px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.12);
 }
 
-.btn:hover{transform:translateY(-3px)}
-
-.primary{
-    color:white;
-    background:linear-gradient(135deg,var(--primary),var(--primary2));
-    box-shadow:0 10px 25px #635bff30;
+.timebox strong{
+    display:block;
+    font-size:28px;
 }
 
-.secondary{
-    color:var(--text);
-    background:var(--card);
-    border:1px solid var(--line);
-}
-
-/* HERO PREVIEW */
-
-.preview{
-    width:365px;
-    padding:22px;
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:27px;
-    box-shadow:0 25px 70px #00000012;
-}
-
-.previewHead{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:15px;
-    font-size:13px;
-    font-weight:800;
-}
-
-.live{
-    padding:5px 9px;
-    border-radius:20px;
-    background:#dcfce7;
-    color:#15803d;
+.timebox small{
+    color:#ddd;
     font-size:9px;
 }
 
-.previewCard{
-    background:var(--bg);
-    padding:17px;
-    border-radius:17px;
-    margin-top:10px;
+.section{
+    padding:60px 0;
 }
 
-.previewCard small{color:var(--muted)}
-
-.previewCard h3{
-    margin-top:7px;
-    font-size:14px;
+.section-title{
+    font-size:35px;
+    margin-bottom:25px;
 }
 
-.progress{
-    height:7px;
-    background:var(--line);
-    border-radius:20px;
-    margin-top:12px;
-}
-
-.progress i{
-    display:block;
-    width:75%;
-    height:100%;
-    border-radius:20px;
-    background:linear-gradient(90deg,var(--primary),var(--primary2));
-}
-
-/* STATS */
-
-.stats{
-    padding:0 7%;
-    margin-top:-35px;
-    position:relative;
+.filters{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:12px;
+    margin-bottom:25px;
 }
 
-.stat{
-    padding:22px;
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:19px;
-    box-shadow:0 15px 45px #0000000b;
-}
-
-.stat h2{font-size:27px}
-
-.stat p{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:5px;
-}
-
-/* SECTIONS */
-
-section{padding:85px 7%}
-
-.sectionHead{margin-bottom:30px}
-
-.sectionHead h2{
-    font-size:32px;
-    letter-spacing:-1px;
-}
-
-.sectionHead p{
-    color:var(--muted);
-    margin-top:7px;
-}
-
-/* SEARCH */
-
-.searchBox{
-    padding:16px;
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:20px;
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:9px;
-}
-
-.input,select{
+.input,.select{
     width:100%;
-    padding:13px;
-    border:1px solid var(--line);
-    border-radius:11px;
-    outline:0;
-    background:var(--bg);
-    color:var(--text);
+    padding:14px 16px;
+    border-radius:14px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:white;
+    outline:none;
 }
 
-.input:focus,select:focus{
+.input:focus,.select:focus{
     border-color:var(--primary);
 }
 
-/* PAPERS */
-
-.paperGrid{
+.papers{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:18px;
-    margin-top:25px;
 }
 
 .paper{
-    padding:20px;
     background:var(--card);
-    border:1px solid var(--line);
-    border-radius:21px;
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:22px;
     transition:.25s;
 }
 
 .paper:hover{
     transform:translateY(-5px);
-    box-shadow:0 20px 50px #0000000d;
+    border-color:#6558e8;
 }
 
-.paperTop{
-    display:flex;
-    justify-content:space-between;
-}
-
-.pdfIcon{
-    width:46px;
-    height:46px;
-    display:grid;
-    place-items:center;
-    border-radius:13px;
-    background:#fff1f2;
-    color:#e11d48;
-    font-size:10px;
-    font-weight:900;
-}
-
-.year{
-    height:max-content;
-    padding:6px 10px;
-    border-radius:20px;
-    background:#635bff14;
-    color:var(--primary);
-    font-size:10px;
-    font-weight:800;
+.paper-icon{
+    font-size:35px;
+    margin-bottom:15px;
 }
 
 .paper h3{
-    font-size:16px;
-    margin-top:17px;
+    margin-bottom:8px;
 }
 
-.paper p{
+.paper-info{
     color:var(--muted);
-    font-size:11px;
-    margin-top:6px;
+    font-size:14px;
+    line-height:1.8;
 }
 
-.tags{
+.paper-actions{
     display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin:15px 0;
+    gap:8px;
+    margin-top:18px;
 }
 
-.tag{
-    padding:6px 8px;
-    border-radius:7px;
-    background:var(--bg);
-    color:var(--muted);
-    font-size:9px;
-}
-
-.paperActions{
-    display:flex;
-    gap:7px;
-}
-
-.paperActions button{
-    flex:1;
-    padding:10px;
-    border-radius:10px;
-    border:1px solid var(--line);
-    background:var(--card);
-    color:var(--text);
-    font-weight:700;
-}
-
-.paperActions .view{
-    background:var(--primary);
-    color:white;
+.btn{
     border:0;
-}
-
-.paperActions .delete{
-    color:var(--danger);
-}
-
-/* EMPTY */
-
-.empty{
-    grid-column:1/-1;
-    text-align:center;
-    padding:60px 20px;
-    color:var(--muted);
-    background:var(--card);
-    border:1px dashed var(--line);
-    border-radius:20px;
-}
-
-/* CATEGORIES */
-
-.categoryGrid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.category{
-    padding:22px;
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:19px;
-    transition:.2s;
-}
-
-.category:hover{
-    transform:translateY(-5px);
-    border-color:var(--primary);
-}
-
-.categoryIcon{
-    font-size:25px;
-    margin-bottom:12px;
-}
-
-.category h3{font-size:15px}
-
-.category p{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:5px;
-}
-
-/* COUNTDOWN */
-
-.countdownBox{
-    padding:45px;
+    padding:12px 17px;
+    border-radius:12px;
+    font-weight:800;
     color:white;
-    border-radius:29px;
-    background:linear-gradient(135deg,#111936,#392475);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:30px;
 }
 
-.countdownBox p{
-    color:#c4c9dc;
+.primary{
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+}
+
+.secondary{
+    background:#202a3d;
+}
+
+.danger{
+    background:#7f1d1d;
+}
+
+.full{
+    width:100%;
+}
+
+.admin-box{
+    max-width:800px;
+    margin:30px auto;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:25px;
+    padding:30px;
+}
+
+.admin-title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.admin-title .icon{
+    font-size:48px;
+}
+
+.admin-title h2{
+    margin-top:10px;
+}
+
+.admin-title p{
+    color:var(--muted);
     margin-top:8px;
 }
 
-.countdown{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.time{
-    min-width:76px;
-    padding:14px 10px;
-    border-radius:14px;
-    text-align:center;
-    background:#ffffff12;
-    border:1px solid #ffffff14;
-}
-
-.time strong{
-    display:block;
-    font-size:25px;
-}
-
-.time span{
-    color:#c3c8db;
-    font-size:8px;
-}
-
-/* ADMIN */
-
-.adminBox{
-    max-width:800px;
-    margin:auto;
-    padding:30px;
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:25px;
-}
-
-.formGrid{
+.form-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:15px;
+    gap:14px;
 }
 
-.formGroup label{
-    display:block;
-    font-size:11px;
-    font-weight:800;
-    margin-bottom:6px;
+.form-grid .full-width{
+    grid-column:1/-1;
 }
 
-.full{grid-column:1/-1}
-
-.fileDrop{
-    padding:25px;
-    border:2px dashed var(--line);
+.file{
+    padding:18px;
+    border:2px dashed #39465e;
     border-radius:17px;
+    background:#0c1220;
+}
+
+.file input{
+    width:100%;
+    color:white;
+}
+
+.status{
+    margin-top:15px;
+    padding:12px;
+    border-radius:12px;
+    display:none;
+}
+
+.status.show{
+    display:block;
+}
+
+.status.success{
+    background:#052e16;
+    color:#86efac;
+}
+
+.status.error{
+    background:#450a0a;
+    color:#fca5a5;
+}
+
+.admin-panel{
+    display:none;
+}
+
+.login-panel{
+    display:block;
+}
+
+.loading{
     text-align:center;
+    color:var(--muted);
+    padding:40px;
 }
 
-.fileDrop input{
-    margin-top:12px;
+.empty{
+    text-align:center;
+    color:var(--muted);
+    padding:40px;
+    grid-column:1/-1;
 }
-
-/* FOOTER */
 
 footer{
-    padding:40px 7%;
-    border-top:1px solid var(--line);
+    margin-top:70px;
+    padding:35px 6%;
+    border-top:1px solid var(--border);
     display:flex;
     justify-content:space-between;
     color:var(--muted);
-    font-size:11px;
 }
-
-/* MODAL */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:5000;
-    background:#000b;
-    align-items:center;
-    justify-content:center;
-    padding:15px;
-}
-
-.modalBox{
-    width:1000px;
-    height:90vh;
-    max-width:100%;
-    background:var(--card);
-    border-radius:20px;
-    overflow:hidden;
-    position:relative;
-}
-
-.modalHead{
-    height:55px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 17px;
-    border-bottom:1px solid var(--line);
-}
-
-.close{
-    width:35px;
-    height:35px;
-    border:0;
-    border-radius:9px;
-    background:var(--bg);
-    color:var(--text);
-    font-size:20px;
-}
-
-#pdfViewer{
-    width:100%;
-    height:calc(100% - 55px);
-    border:0;
-}
-
-/* TOAST */
 
 .toast{
     position:fixed;
     right:20px;
     bottom:20px;
-    z-index:9000;
-    padding:13px 17px;
-    border-radius:12px;
     background:#111827;
+    border:1px solid var(--border);
     color:white;
-    transform:translateY(80px);
+    padding:15px 20px;
+    border-radius:14px;
+    transform:translateY(120px);
     opacity:0;
     transition:.3s;
-    font-size:12px;
+    z-index:5000;
 }
 
 .toast.show{
@@ -614,81 +375,53 @@ footer{
     opacity:1;
 }
 
-/* MOBILE */
-
-@media(max-width:950px){
+@media(max-width:850px){
 
     .navlinks{
         display:none;
-        position:absolute;
-        top:74px;
-        left:0;
-        right:0;
-        padding:20px;
-        background:var(--card);
-        flex-direction:column;
-        border-bottom:1px solid var(--line);
     }
 
-    .navlinks.active{display:flex}
-
-    .menu{display:block}
-
-    .hero{
+    .countdown{
         flex-direction:column;
-        align-items:flex-start;
+        text-align:center;
     }
 
-    .preview{
+    .timer{
         width:100%;
-        max-width:370px;
+        justify-content:center;
+        flex-wrap:wrap;
     }
 
-    .stats{
+    .papers{
         grid-template-columns:1fr 1fr;
     }
 
-    .paperGrid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .categoryGrid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .countdownBox{
-        flex-direction:column;
-        align-items:flex-start;
+    .filters{
+        grid-template-columns:1fr;
     }
 }
 
-@media(max-width:600px){
+@media(max-width:550px){
 
-    .hero h1{
-        letter-spacing:-2px;
-    }
-
-    .stats,
-    .paperGrid,
-    .categoryGrid{
+    .papers{
         grid-template-columns:1fr;
     }
 
-    .searchBox{
+    .form-grid{
         grid-template-columns:1fr;
     }
 
-    .formGrid{
-        grid-template-columns:1fr;
+    .timer{
+        gap:5px;
     }
 
-    .full{
-        grid-column:auto;
+    .timebox{
+        min-width:70px;
     }
 
     footer{
         flex-direction:column;
-        gap:12px;
+        gap:10px;
     }
 }
 </style>
@@ -696,463 +429,224 @@ footer{
 
 <body>
 
-<!-- NAVBAR -->
-
 <nav class="navbar">
 
     <div class="logo">
-        MD <span>Papers</span>
+        <span>MD</span> Papers
     </div>
 
-    <ul class="navlinks" id="navlinks">
-
-        <li><a href="#home">Home</a></li>
-        <li><a href="#papers">Past Papers</a></li>
-        <li><a href="#categories">Categories</a></li>
-        <li><a href="#countdown">Countdown</a></li>
-        <li><a href="#admin">Admin</a></li>
-
-    </ul>
-
-    <div class="navbuttons">
-
-        <button class="iconbtn" onclick="toggleDark()">◐</button>
-
-        <button class="iconbtn menu"
-                onclick="toggleMenu()">☰</button>
-
+    <div class="navlinks">
+        <a href="#home">Home</a>
+        <a href="#papers">Past Papers</a>
+        <a href="#admin">Admin</a>
     </div>
+
+    <button class="theme" onclick="toggleTheme()">◐</button>
 
 </nav>
 
 
-<!-- HERO -->
-
 <section class="hero" id="home">
 
-    <div class="heroText">
+    <h1>
+        Learn Better.<br>
+        <span>Score Better.</span>
+    </h1>
 
-        <span class="badge">
-            🇱🇰 Sri Lankan Student Platform
-        </span>
-
-        <h1>
-            Find Papers.<br>
-            <span class="gradient">
-                Prepare Better.
-            </span>
-        </h1>
-
-        <p>
-            MD Papers brings past papers, model papers,
-            marking schemes and educational resources
-            together in one modern platform.
-        </p>
-
-        <div class="heroButtons">
-
-            <a href="#papers">
-                <button class="btn primary">
-                    Explore Papers →
-                </button>
-            </a>
-
-            <a href="#categories">
-                <button class="btn secondary">
-                    Browse Categories
-                </button>
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <div class="preview">
-
-        <div class="previewHead">
-            <span>MD Papers</span>
-            <span class="live">● LIVE</span>
-        </div>
-
-        <div class="previewCard">
-
-            <small>O/L Mathematics</small>
-
-            <h3>2025 Past Paper</h3>
-
-            <div class="progress">
-                <i></i>
-            </div>
-
-        </div>
-
-        <div class="previewCard">
-
-            <small>Grade 11 Science</small>
-
-            <h3>3rd Term Test Paper</h3>
-
-        </div>
-
-        <div class="previewCard">
-
-            <small>Upcoming</small>
-
-            <h3>O/L Examination</h3>
-
-        </div>
-
-    </div>
+    <p>
+        Sri Lanka's modern past paper platform.
+    </p>
 
 </section>
 
 
-<!-- STATS -->
+<div class="container">
 
-<div class="stats">
-
-    <div class="stat">
-        <h2 id="paperCount">0</h2>
-        <p>Uploaded Papers</p>
-    </div>
-
-    <div class="stat">
-        <h2>20+</h2>
-        <p>Subjects</p>
-    </div>
-
-    <div class="stat">
-        <h2>1–13</h2>
-        <p>Grades</p>
-    </div>
-
-    <div class="stat">
-        <h2>100%</h2>
-        <p>Free Access</p>
-    </div>
-
-</div>
-
-
-<!-- PAPERS -->
-
-<section id="papers">
-
-    <div class="sectionHead">
-
-        <h2>Past Papers</h2>
-
-        <p>
-            Search and browse your uploaded papers.
-        </p>
-
-    </div>
-
-
-    <div class="searchBox">
-
-        <input
-            id="search"
-            class="input"
-            placeholder="🔎 Search papers..."
-            oninput="renderPapers()"
-        >
-
-        <select id="filterSubject"
-                onchange="renderPapers()">
-
-            <option value="">All Subjects</option>
-            <option>Science</option>
-            <option>Mathematics</option>
-            <option>ICT</option>
-            <option>History</option>
-            <option>English</option>
-            <option>Sinhala</option>
-
-        </select>
-
-
-        <select id="filterGrade"
-                onchange="renderPapers()">
-
-            <option value="">All Grades</option>
-            <option>Grade 5</option>
-            <option>Grade 6</option>
-            <option>Grade 7</option>
-            <option>Grade 8</option>
-            <option>Grade 9</option>
-            <option>Grade 10</option>
-            <option>Grade 11</option>
-            <option>O/L</option>
-            <option>A/L</option>
-
-        </select>
-
-
-        <select id="filterYear"
-                onchange="renderPapers()">
-
-            <option value="">All Years</option>
-            <option>2026</option>
-            <option>2025</option>
-            <option>2024</option>
-            <option>2023</option>
-
-        </select>
-
-    </div>
-
-
-    <div class="paperGrid"
-         id="paperGrid"></div>
-
-</section>
-
-
-<!-- CATEGORIES -->
-
-<section id="categories">
-
-    <div class="sectionHead">
-
-        <h2>Browse Categories</h2>
-
-        <p>
-            Quickly find the resources you need.
-        </p>
-
-    </div>
-
-
-    <div class="categoryGrid">
-
-        <div class="category">
-            <div class="categoryIcon">🎓</div>
-            <h3>G.C.E. O/L</h3>
-            <p>Past Papers & Marking Schemes</p>
-        </div>
-
-        <div class="category">
-            <div class="categoryIcon">🏫</div>
-            <h3>G.C.E. A/L</h3>
-            <p>Advanced Level Papers</p>
-        </div>
-
-        <div class="category">
-            <div class="categoryIcon">📚</div>
-            <h3>Grade 1–13</h3>
-            <p>School Term Test Papers</p>
-        </div>
-
-        <div class="category">
-            <div class="categoryIcon">⭐</div>
-            <h3>Scholarship</h3>
-            <p>Grade 5 Resources</p>
-        </div>
-
-        <div class="category">
-            <div class="categoryIcon">📝</div>
-            <h3>Model Papers</h3>
-            <p>Practice Questions</p>
-        </div>
-
-        <div class="category">
-            <div class="categoryIcon">✅</div>
-            <h3>Marking Schemes</h3>
-            <p>Answers & Schemes</p>
-        </div>
-
-        <div class="category">
-            <div class="categoryIcon">📖</div>
-            <h3>Short Notes</h3>
-            <p>Study Materials</p>
-        </div>
-
-        <div class="category">
-            <div class="categoryIcon">🔥</div>
-            <h3>Popular Papers</h3>
-            <p>Most viewed resources</p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- COUNTDOWN -->
-
-<section id="countdown">
-
-    <div class="countdownBox">
+    <section class="countdown">
 
         <div>
-
-            <h2>
-                ⏳ O/L Examination Countdown
-            </h2>
-
-            <p>
-                Keep track of your examination date.
-            </p>
-
+            <h2>⏳ O/L Examination Countdown</h2>
+            <p>December 08, 2026</p>
         </div>
 
+        <div class="timer">
 
-        <div class="countdown">
-
-            <div class="time">
+            <div class="timebox">
                 <strong id="days">00</strong>
-                <span>DAYS</span>
+                <small>DAYS</small>
             </div>
 
-            <div class="time">
+            <div class="timebox">
                 <strong id="hours">00</strong>
-                <span>HOURS</span>
+                <small>HOURS</small>
             </div>
 
-            <div class="time">
+            <div class="timebox">
                 <strong id="minutes">00</strong>
-                <span>MINUTES</span>
+                <small>MINUTES</small>
             </div>
 
-            <div class="time">
+            <div class="timebox">
                 <strong id="seconds">00</strong>
-                <span>SECONDS</span>
+                <small>SECONDS</small>
             </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- ADMIN -->
+    <section class="section" id="papers">
 
-<section id="admin">
+        <h2 class="section-title">📚 Past Papers</h2>
 
-    <div class="sectionHead" style="text-align:center">
+        <div class="filters">
 
-        <h2>📤 Upload Past Paper</h2>
+            <input
+                id="search"
+                class="input"
+                placeholder="Search papers..."
+                oninput="renderPapers()">
 
-        <p>
-            Only MD Papers administrator can upload PDFs.
+            <select
+                id="subjectFilter"
+                class="select"
+                onchange="renderPapers()">
+
+                <option value="">All Subjects</option>
+
+            </select>
+
+            <select
+                id="yearFilter"
+                class="select"
+                onchange="renderPapers()">
+
+                <option value="">All Years</option>
+
+            </select>
+
+        </div>
+
+        <div id="papersList" class="papers">
+
+            <div class="loading">
+                Loading past papers...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section" id="admin">
+
+        <h2 class="section-title" style="text-align:center">
+            📤 Upload Past Paper
+        </h2>
+
+        <p style="text-align:center;color:var(--muted)">
+            Only the MD Papers administrator can upload PDFs.
         </p>
 
-    </div>
 
-    <!-- PASSWORD LOCK -->
-    <div id="adminLock" class="adminBox">
+        <!-- LOGIN -->
 
-        <div style="text-align:center">
+        <div
+            id="loginPanel"
+            class="admin-box login-panel">
 
-            <div style="font-size:45px">🔐</div>
+            <div class="admin-title">
 
-            <h2 style="margin-top:10px">
-                MD Papers Admin
-            </h2>
+                <div class="icon">🔐</div>
 
-            <p style="
-                color:var(--muted);
-                margin:10px 0 20px;
-                font-size:12px;
-            ">
-                Enter the administrator password
-                to upload past papers.
-            </p>
+                <h2>MD Papers Admin</h2>
+
+                <p>
+                    Administrator login required.
+                </p>
+
+            </div>
+
+
+            <input
+                id="email"
+                type="email"
+                class="input"
+                placeholder="Admin email">
+
+            <br><br>
+
+            <input
+                id="password"
+                type="password"
+                class="input"
+                placeholder="Admin password">
+
+            <br><br>
+
+            <button
+                class="btn primary full"
+                onclick="adminLogin()">
+
+                🔓 Login
+
+            </button>
+
+            <div id="loginStatus" class="status"></div>
 
         </div>
 
-<div
-    id="adminPanel"
-    class="adminBox"
-    style="display:none">
-    >
 
-        <div class="formGrid">
+        <!-- ADMIN PANEL -->
 
-            <div class="formGroup">
+        <div
+            id="adminPanel"
+            class="admin-box admin-panel">
 
-                <label>Paper Title</label>
+            <div class="admin-title">
+
+                <div class="icon">📄</div>
+
+                <h2>Upload Past Paper</h2>
+
+                <p>
+                    Logged in as administrator.
+                </p>
+
+            </div>
+
+
+            <div class="form-grid">
 
                 <input
                     id="paperTitle"
                     class="input"
-                    placeholder="Example: Grade 11 Science 2026">
+                    placeholder="Paper title">
 
-            </div>
-
-
-            <div class="formGroup">
-
-                <label>Subject</label>
-
-                <select id="paperSubject">
-
-                    <option>Science</option>
-                    <option>Mathematics</option>
-                    <option>ICT</option>
-                    <option>History</option>
-                    <option>English</option>
-                    <option>Sinhala</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="formGroup">
-
-                <label>Grade</label>
-
-                <select id="paperGrade">
-
-                    <option>Grade 5</option>
-                    <option>Grade 6</option>
-                    <option>Grade 7</option>
-                    <option>Grade 8</option>
-                    <option>Grade 9</option>
-                    <option>Grade 10</option>
-                    <option>Grade 11</option>
-                    <option>O/L</option>
-                    <option>A/L</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="formGroup">
-
-                <label>Year</label>
+                <input
+                    id="paperSubject"
+                    class="input"
+                    placeholder="Subject">
 
                 <input
                     id="paperYear"
                     class="input"
                     type="number"
-                    value="2026">
+                    placeholder="Year">
 
-            </div>
+                <input
+                    id="paperExam"
+                    class="input"
+                    placeholder="Exam type e.g. O/L">
 
+                <div class="file full-width">
 
-            <div class="formGroup full">
+                    <label>
+                        📎 Select PDF
+                    </label>
 
-                <label>PDF File</label>
-
-                <div class="fileDrop">
-
-                    <div style="font-size:30px">
-                        📄
-                    </div>
-
-                    <div style="
-                        margin-top:8px;
-                        color:var(--muted);
-                        font-size:12px;
-                    ">
-                        Select your PDF file
-                    </div>
+                    <br><br>
 
                     <input
                         id="pdfFile"
@@ -1163,40 +657,48 @@ footer{
 
             </div>
 
+            <br>
+
+            <button
+                class="btn primary full"
+                onclick="uploadPDF()">
+
+                ☁️ Upload PDF
+
+            </button>
+
+            <div
+                id="uploadStatus"
+                class="status">
+            </div>
+
+            <br>
+
+            <button
+                class="btn secondary"
+                onclick="adminLogout()">
+
+                Logout
+
+            </button>
+
         </div>
 
+    </section>
 
-        <button
-            class="btn primary"
-            style="width:100%;margin-top:17px"
-            onclick="addPaper()">
+</div>
 
-            ⬆ Add PDF to MD Papers
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- FOOTER -->
 
 <footer>
 
     <div>
-
-        <b style="
-            color:var(--primary);
-            font-size:18px;
-        ">
+        <strong style="color:#7567ff;font-size:20px">
             MD Papers
-        </b>
+        </strong>
 
         <br>
 
         Learn • Practice • Succeed
-
     </div>
 
     <div>
@@ -1206,546 +708,740 @@ footer{
 </footer>
 
 
-<!-- PDF VIEWER -->
+<div id="toast" class="toast"></div>
 
-<div class="modal"
-     id="viewerModal">
 
-    <div class="modalBox">
+<script type="module">
 
-        <div class="modalHead">
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-app.js";
 
-            <strong id="viewerTitle">
-                PDF Viewer
-            </strong>
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-auth.js";
 
-            <button
-                class="close"
-                onclick="closeViewer()">
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    doc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
-                ×
+import {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL,
+    deleteObject
+} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-storage.js";
 
-            </button>
 
-        </div>
+// ======================================================
+// FIREBASE CONFIG
+// ======================================================
+//
+// Firebase Console → Project settings → Your apps → Web app
+//
+// Replace these values with YOUR Firebase configuration.
+//
 
-        <iframe id="pdfViewer"></iframe>
+const firebaseConfig = {
 
-    </div>
+    apiKey: "YOUR_API_KEY",
 
-</div>
+    authDomain:
+        "YOUR_PROJECT.firebaseapp.com",
 
+    projectId:
+        "YOUR_PROJECT_ID",
 
-<!-- TOAST -->
+    storageBucket:
+        "YOUR_PROJECT.firebasestorage.app",
 
-<div class="toast"
-     id="toast">
-</div>
+    messagingSenderId:
+        "YOUR_SENDER_ID",
 
+    appId:
+        "YOUR_APP_ID"
 
-<script>
+};
 
-/* =========================================================
-   MD PAPERS
-   LOCAL PDF DATABASE
-   ========================================================= */
 
-let papers = [];
+// ======================================================
+// ADMIN EMAIL
+// ======================================================
+//
+// Put YOUR Firebase Authentication admin email here.
+// This is NOT your password.
+//
 
-/*
-   IndexedDB is used instead of localStorage because
-   localStorage is not suitable for storing PDF files.
-*/
+const ADMIN_EMAIL =
+    "menidudulanja2@gmail.com";
 
-const DB_NAME = "MD_PAPERS_DATABASE";
-const STORE_NAME = "papers";
 
-let db;
+// ======================================================
 
+const app = initializeApp(firebaseConfig);
 
-/* OPEN DATABASE */
+const auth = getAuth(app);
 
-function openDatabase(){
+const db = getFirestore(app);
 
-    return new Promise((resolve,reject)=>{
+const storage = getStorage(app);
 
-        const request =
-            indexedDB.open(DB_NAME,1);
 
+let allPapers = [];
 
-        request.onupgradeneeded = function(e){
 
-            const database = e.target.result;
+// ======================================================
+// TOAST
+// ======================================================
 
-            if(!database.objectStoreNames.contains(STORE_NAME)){
+window.showToast = function(message){
 
-                database.createObjectStore(
-                    STORE_NAME,
-                    {keyPath:"id",autoIncrement:true}
-                );
+    const toast =
+        document.getElementById("toast");
 
-            }
+    toast.textContent = message;
 
-        };
+    toast.classList.add("show");
 
+    setTimeout(() => {
 
-        request.onsuccess = function(e){
+        toast.classList.remove("show");
 
-            db=e.target.result;
-            resolve(db);
+    },3000);
 
-        };
+};
 
 
-        request.onerror = function(){
+// ======================================================
+// ADMIN LOGIN
+// ======================================================
 
-            reject(request.error);
+window.adminLogin = async function(){
 
-        };
+    const email =
+        document.getElementById("email").value.trim();
 
-    });
+    const password =
+        document.getElementById("password").value;
 
-}
+    const status =
+        document.getElementById("loginStatus");
 
 
-/* LOAD PAPERS */
+    if(!email || !password){
 
-function loadPapers(){
-
-    return new Promise((resolve,reject)=>{
-
-        const transaction =
-            db.transaction(
-                STORE_NAME,
-                "readonly"
-            );
-
-        const store =
-            transaction.objectStore(
-                STORE_NAME
-            );
-
-        const request =
-            store.getAll();
-
-
-        request.onsuccess=function(){
-
-            papers=request.result || [];
-
-            resolve();
-
-        };
-
-
-        request.onerror=function(){
-
-            reject(request.error);
-
-        };
-
-    });
-
-}
-
-
-/* SAVE PAPER */
-
-function savePaper(paper){
-
-    return new Promise((resolve,reject)=>{
-
-        const transaction =
-            db.transaction(
-                STORE_NAME,
-                "readwrite"
-            );
-
-        const store =
-            transaction.objectStore(
-                STORE_NAME
-            );
-
-        const request =
-            store.add(paper);
-
-
-        request.onsuccess=function(){
-
-            paper.id=request.result;
-
-            resolve(paper);
-
-        };
-
-
-        request.onerror=function(){
-
-            reject(request.error);
-
-        };
-
-    });
-
-}
-
-
-/* DELETE PAPER */
-
-function deletePaper(id){
-
-    return new Promise((resolve,reject)=>{
-
-        const transaction =
-            db.transaction(
-                STORE_NAME,
-                "readwrite"
-            );
-
-        const store =
-            transaction.objectStore(
-                STORE_NAME
-            );
-
-        const request =
-            store.delete(id);
-
-
-        request.onsuccess=resolve;
-
-        request.onerror=function(){
-
-            reject(request.error);
-
-        };
-
-    });
-
-}
-
-
-/* ADD PAPER */
-
-async function addPaper(){
-
-    const title =
-        document
-        .getElementById("paperTitle")
-        .value
-        .trim();
-
-
-    const subject =
-        document
-        .getElementById("paperSubject")
-        .value;
-
-
-    const grade =
-        document
-        .getElementById("paperGrade")
-        .value;
-
-
-    const year =
-        document
-        .getElementById("paperYear")
-        .value;
-
-
-    const file =
-        document
-        .getElementById("pdfFile")
-        .files[0];
-
-
-    if(!title){
-
-        showToast(
-            "Please enter a paper title."
+        showStatus(
+            status,
+            "Enter email and password.",
+            "error"
         );
 
         return;
-
     }
 
 
-    if(!file){
+    if(email.toLowerCase() !==
+       ADMIN_EMAIL.toLowerCase()){
 
-        showToast(
-            "Please select a PDF."
+        showStatus(
+            status,
+            "This account is not the MD Papers administrator.",
+            "error"
         );
 
         return;
-
     }
-
-
-    if(file.type !== "application/pdf"){
-
-        showToast(
-            "Only PDF files are allowed."
-        );
-
-        return;
-
-    }
-
-
-    /*
-       Convert the PDF to ArrayBuffer so IndexedDB
-       can store the actual PDF.
-    */
-
-    const buffer =
-        await file.arrayBuffer();
-
-
-    const paper={
-
-        title:title,
-
-        subject:subject,
-
-        grade:grade,
-
-        year:year,
-
-        filename:file.name,
-
-        size:file.size,
-
-        type:"application/pdf",
-
-        data:buffer,
-
-        createdAt:Date.now()
-
-    };
 
 
     try{
 
-        await savePaper(paper);
-
-        document
-        .getElementById("paperTitle")
-        .value="";
-
-
-        document
-        .getElementById("pdfFile")
-        .value="";
-
-
-        await loadPapers();
-
-        renderPapers();
-
-        showToast(
-            "✓ PDF uploaded successfully!"
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
         );
 
-
-        document
-        .getElementById("papers")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
+        showToast("✓ Admin login successful.");
 
     }
     catch(error){
 
         console.error(error);
 
-        showToast(
-            "Could not save the PDF."
+        showStatus(
+            status,
+            "Login failed. Check your email and password.",
+            "error"
         );
+
+    }
+
+};
+
+
+// ======================================================
+// AUTH STATE
+// ======================================================
+
+onAuthStateChanged(auth,(user)=>{
+
+    const loginPanel =
+        document.getElementById("loginPanel");
+
+    const adminPanel =
+        document.getElementById("adminPanel");
+
+
+    if(user &&
+       user.email &&
+       user.email.toLowerCase() ===
+       ADMIN_EMAIL.toLowerCase()){
+
+        loginPanel.style.display = "none";
+
+        adminPanel.style.display = "block";
+
+    }
+    else{
+
+        loginPanel.style.display = "block";
+
+        adminPanel.style.display = "none";
+
+    }
+
+});
+
+
+// ======================================================
+// LOGOUT
+// ======================================================
+
+window.adminLogout = async function(){
+
+    await signOut(auth);
+
+    showToast("Logged out.");
+
+};
+
+
+// ======================================================
+// UPLOAD PDF
+// ======================================================
+
+window.uploadPDF = async function(){
+
+    const title =
+        document.getElementById("paperTitle").value.trim();
+
+    const subject =
+        document.getElementById("paperSubject").value.trim();
+
+    const year =
+        document.getElementById("paperYear").value.trim();
+
+    const exam =
+        document.getElementById("paperExam").value.trim();
+
+    const file =
+        document.getElementById("pdfFile").files[0];
+
+    const status =
+        document.getElementById("uploadStatus");
+
+
+    if(!title || !subject || !year || !exam || !file){
+
+        showStatus(
+            status,
+            "Please complete all fields and select a PDF.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(file.type !== "application/pdf"){
+
+        showStatus(
+            status,
+            "Only PDF files are allowed.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    // 25 MB limit
+    if(file.size > 25 * 1024 * 1024){
+
+        showStatus(
+            status,
+            "PDF must be smaller than 25 MB.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const user = auth.currentUser;
+
+
+    if(!user){
+
+        showStatus(
+            status,
+            "Please login as administrator first.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    try{
+
+        showStatus(
+            status,
+            "Uploading PDF...",
+            "success"
+        );
+
+
+        const safeName =
+            file.name
+            .replace(/[^a-zA-Z0-9._-]/g,"_");
+
+
+        const uniqueName =
+            Date.now() + "_" + safeName;
+
+
+        const storagePath =
+            "past-papers/" +
+            uniqueName;
+
+
+        const fileRef =
+            ref(storage,storagePath);
+
+
+        // Upload PDF
+        await uploadBytes(
+            fileRef,
+            file,
+            {
+                contentType:"application/pdf"
+            }
+        );
+
+
+        // Get public download URL
+        const downloadURL =
+            await getDownloadURL(fileRef);
+
+
+        // Save metadata
+        await addDoc(
+            collection(db,"papers"),
+            {
+
+                title:title,
+
+                subject:subject,
+
+                year:Number(year),
+
+                exam:exam,
+
+                fileName:file.name,
+
+                storagePath:storagePath,
+
+                downloadURL:downloadURL,
+
+                createdAt:serverTimestamp(),
+
+                uploadedBy:user.uid
+
+            }
+        );
+
+
+        showStatus(
+            status,
+            "✓ PDF uploaded successfully!",
+            "success"
+        );
+
+
+        document.getElementById(
+            "paperTitle"
+        ).value = "";
+
+
+        document.getElementById(
+            "paperSubject"
+        ).value = "";
+
+
+        document.getElementById(
+            "paperYear"
+        ).value = "";
+
+
+        document.getElementById(
+            "paperExam"
+        ).value = "";
+
+
+        document.getElementById(
+            "pdfFile"
+        ).value = "";
+
+
+        await loadPapers();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showStatus(
+            status,
+            "Upload failed: " + error.message,
+            "error"
+        );
+
+    }
+
+};
+
+
+// ======================================================
+// LOAD PAPERS
+// ======================================================
+
+async function loadPapers(){
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(db,"papers")
+            );
+
+
+        allPapers =
+            snapshot.docs.map(item =>({
+
+                id:item.id,
+
+                ...item.data()
+
+            }));
+
+
+        allPapers.sort((a,b)=>{
+
+            return Number(b.year || 0)
+                 - Number(a.year || 0);
+
+        });
+
+
+        updateFilters();
+
+        renderPapers();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        document.getElementById(
+            "papersList"
+        ).innerHTML = `
+
+            <div class="empty">
+                Unable to load papers.
+                Please check Firebase setup.
+            </div>
+
+        `;
 
     }
 
 }
 
 
-/* RENDER PAPERS */
+// ======================================================
+// FILTERS
+// ======================================================
 
-function renderPapers(){
+function updateFilters(){
 
-    const grid =
-        document
-        .getElementById("paperGrid");
+    const subjects =
+        [...new Set(
+            allPapers
+            .map(p => p.subject)
+            .filter(Boolean)
+        )];
+
+
+    const years =
+        [...new Set(
+            allPapers
+            .map(p => p.year)
+            .filter(Boolean)
+        )];
+
+
+    const subjectFilter =
+        document.getElementById(
+            "subjectFilter"
+        );
+
+
+    const yearFilter =
+        document.getElementById(
+            "yearFilter"
+        );
+
+
+    const oldSubject =
+        subjectFilter.value;
+
+
+    const oldYear =
+        yearFilter.value;
+
+
+    subjectFilter.innerHTML =
+        `<option value="">All Subjects</option>`;
+
+
+    subjects.sort().forEach(subject=>{
+
+        subjectFilter.innerHTML += `
+
+            <option value="${escapeHTML(subject)}">
+                ${escapeHTML(subject)}
+            </option>
+
+        `;
+
+    });
+
+
+    yearFilter.innerHTML =
+        `<option value="">All Years</option>`;
+
+
+    years.sort((a,b)=>b-a)
+         .forEach(year=>{
+
+        yearFilter.innerHTML += `
+
+            <option value="${year}">
+                ${year}
+            </option>
+
+        `;
+
+    });
+
+
+    subjectFilter.value =
+        oldSubject;
+
+
+    yearFilter.value =
+        oldYear;
+
+}
+
+
+// ======================================================
+// RENDER
+// ======================================================
+
+window.renderPapers = function(){
+
+    const list =
+        document.getElementById(
+            "papersList"
+        );
 
 
     const search =
-        document
-        .getElementById("search")
-        .value
-        .toLowerCase();
+        document.getElementById(
+            "search"
+        ).value
+         .toLowerCase()
+         .trim();
 
 
     const subject =
-        document
-        .getElementById("filterSubject")
-        .value;
-
-
-    const grade =
-        document
-        .getElementById("filterGrade")
-        .value;
+        document.getElementById(
+            "subjectFilter"
+        ).value;
 
 
     const year =
-        document
-        .getElementById("filterYear")
-        .value;
+        document.getElementById(
+            "yearFilter"
+        ).value;
 
 
     const filtered =
-        papers.filter(p=>{
+        allPapers.filter(p=>{
 
             const text =
                 (
-                    p.title+" "+
-                    p.subject+" "+
-                    p.grade+" "+
+                    p.title + " " +
+                    p.subject + " " +
+                    p.exam + " " +
                     p.year
                 ).toLowerCase();
 
 
             return (
 
-                text.includes(search) &&
+                (!search ||
+                 text.includes(search))
+
+                &&
 
                 (!subject ||
-                 p.subject===subject) &&
+                 p.subject === subject)
 
-                (!grade ||
-                 p.grade===grade) &&
+                &&
 
                 (!year ||
-                 String(p.year)===String(year))
+                 String(p.year) === String(year))
 
             );
 
         });
 
 
-    if(filtered.length===0){
+    if(!filtered.length){
 
-        grid.innerHTML=`
+        list.innerHTML = `
 
             <div class="empty">
 
-                <div style="font-size:40px">
-                    📂
-                </div>
-
-                <h3 style="margin-top:10px">
-                    No papers found
-                </h3>
-
-                <p style="margin-top:6px">
-                    Upload a PDF from the Admin section.
-                </p>
+                📚 No past papers found.
 
             </div>
 
         `;
 
-    }
-    else{
-
-        grid.innerHTML =
-            filtered.map(p=>paperHTML(p))
-            .join("");
-
+        return;
     }
 
 
-    document
-    .getElementById("paperCount")
-    .innerText= papers.length;
+    list.innerHTML =
+        filtered.map(p=>paperHTML(p)).join("");
 
-}
+};
 
 
-/* PAPER CARD */
+// ======================================================
+// PAPER CARD
+// ======================================================
 
 function paperHTML(p){
+
+    const isAdmin =
+        auth.currentUser &&
+        auth.currentUser.email &&
+        auth.currentUser.email.toLowerCase()
+        === ADMIN_EMAIL.toLowerCase();
+
 
     return `
 
         <article class="paper">
 
-            <div class="paperTop">
-
-                <div class="pdfIcon">
-                    PDF
-                </div>
-
-                <div class="year">
-                    ${escapeHTML(p.year)}
-                </div>
-
+            <div class="paper-icon">
+                📄
             </div>
-
 
             <h3>
-                ${escapeHTML(p.title)}
+                ${escapeHTML(p.title || "Past Paper")}
             </h3>
 
+            <div class="paper-info">
 
-            <p>
-                ${escapeHTML(p.subject)}
-                •
-                ${escapeHTML(p.grade)}
-            </p>
+                📚 ${escapeHTML(p.subject || "-")}
+                <br>
 
+                📅 ${escapeHTML(String(p.year || "-"))}
+                <br>
 
-            <div class="tags">
-
-                <span class="tag">
-                    ${escapeHTML(p.subject)}
-                </span>
-
-                <span class="tag">
-                    ${escapeHTML(p.grade)}
-                </span>
-
-                <span class="tag">
-                    ${escapeHTML(p.year)}
-                </span>
+                📝 ${escapeHTML(p.exam || "-")}
 
             </div>
 
 
-            <div class="paperActions">
+            <div class="paper-actions">
 
-                <button
-                    class="view"
-                    onclick="viewPDF(${p.id})">
+                <a
+                    class="btn primary"
+                    href="${escapeAttr(p.downloadURL)}"
+                    target="_blank"
+                    rel="noopener">
 
-                    View
+                    👁️ View
 
-                </button>
-
-
-                <button
-                    onclick="downloadPDF(${p.id})">
-
-                    Download
-
-                </button>
+                </a>
 
 
-                <button
-                    class="delete"
-                    onclick="removePaper(${p.id})">
+                <a
+                    class="btn secondary"
+                    href="${escapeAttr(p.downloadURL)}"
+                    target="_blank"
+                    rel="noopener"
+                    download>
 
-                    Delete
+                    ⬇️ Download
 
-                </button>
+                </a>
+
+
+                ${
+                    isAdmin
+                    ?
+                    `
+
+                    <button
+                        class="btn danger"
+                        onclick="deletePaper('${escapeAttr(p.id)}')">
+
+                        🗑️
+
+                    </button>
+
+                    `
+                    :
+                    ""
+                }
 
             </div>
 
@@ -1756,279 +1452,231 @@ function paperHTML(p){
 }
 
 
-/* VIEW PDF */
+// ======================================================
+// DELETE
+// ======================================================
 
-function viewPDF(id){
+window.deletePaper = async function(id){
 
-    const paper =
-        papers.find(
-            p=>p.id===id
-        );
+    const user =
+        auth.currentUser;
 
 
-    if(!paper)return;
-
-
-    const blob =
-        new Blob(
-            [paper.data],
-            {type:"application/pdf"}
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-
-    document
-    .getElementById("viewerTitle")
-    .innerText=paper.title;
-
-
-    document
-    .getElementById("pdfViewer")
-    .src=url;
-
-
-    document
-    .getElementById("viewerModal")
-    .style.display="flex";
-
-
-}
-
-
-/* CLOSE VIEWER */
-
-function closeViewer(){
-
-    const iframe =
-        document
-        .getElementById("pdfViewer");
-
-
-    iframe.src="";
-
-
-    document
-    .getElementById("viewerModal")
-    .style.display="none";
-
-}
-
-
-/* DOWNLOAD PDF */
-
-function downloadPDF(id){
-
-    const paper =
-        papers.find(
-            p=>p.id===id
-        );
-
-
-    if(!paper)return;
-
-
-    const blob =
-        new Blob(
-            [paper.data],
-            {type:"application/pdf"}
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-
-    const a =
-        document.createElement("a");
-
-
-    a.href=url;
-
-    a.download =
-        paper.filename ||
-        paper.title+".pdf";
-
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    a.remove();
-
-
-    setTimeout(
-        ()=>URL.revokeObjectURL(url),
-        1000
-    );
-
-}
-
-
-/* DELETE */
-
-async function removePaper(id){
-
-    const paper =
-        papers.find(
-            p=>p.id===id
-        );
-
-
-    if(!paper)return;
-
-
-    const yes =
-        confirm(
-            "Delete this paper?\n\n"+
-            paper.title
-        );
-
-
-    if(!yes)return;
-
-
-    await deletePaper(id);
-
-    await loadPapers();
-
-    renderPapers();
-
-    showToast(
-        "Paper deleted."
-    );
-
-}
-
-
-/* ESCAPE HTML */
-
-function escapeHTML(value){
-
-    return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
-
-
-/* DARK MODE */
-
-function toggleDark(){
-
-    document
-    .body
-    .classList
-    .toggle("dark");
-
-
-    localStorage.setItem(
-        "mdDark",
-        document
-        .body
-        .classList
-        .contains("dark")
-    );
-
-}
-
-
-if(
-    localStorage.getItem("mdDark")
-    ==="true"
-){
-
-    document
-    .body
-    .classList
-    .add("dark");
-
-}
-
-
-/* MOBILE MENU */
-
-function toggleMenu(){
-
-    document
-    .getElementById("navlinks")
-    .classList
-    .toggle("active");
-
-}
-
-
-/* COUNTDOWN */
-
-const examDate =
-    new Date(
-        "December 08, 2026 00:00:00"
-    ).getTime();
-
-
-function updateCountdown(){
-
-    const distance =
-        examDate-Date.now();
-
-
-    if(distance<=0){
-
-        ["days","hours","minutes","seconds"]
-        .forEach(id=>{
-            document
-            .getElementById(id)
-            .innerText="00";
-        });
+    if(!user){
 
         return;
 
     }
 
 
-    document
-    .getElementById("days")
-    .innerText =
-        String(
-            Math.floor(
-                distance/86400000
+    if(
+        !confirm(
+            "Delete this PDF permanently?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        const paper =
+            allPapers.find(
+                p => p.id === id
+            );
+
+
+        if(!paper){
+
+            return;
+
+        }
+
+
+        if(paper.storagePath){
+
+            const fileRef =
+                ref(
+                    storage,
+                    paper.storagePath
+                );
+
+
+            await deleteObject(
+                fileRef
+            );
+
+        }
+
+
+        await deleteDoc(
+            doc(
+                db,
+                "papers",
+                id
             )
-        ).padStart(2,"0");
+        );
 
 
-    document
-    .getElementById("hours")
-    .innerText =
-        String(
-            Math.floor(
-                distance%86400000/3600000
-            )
-        ).padStart(2,"0");
+        showToast(
+            "✓ Paper deleted."
+        );
 
 
-    document
-    .getElementById("minutes")
-    .innerText =
-        String(
-            Math.floor(
-                distance%3600000/60000
-            )
-        ).padStart(2,"0");
+        await loadPapers();
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showToast(
+            "Delete failed."
+        );
+
+    }
+
+};
 
 
-    document
-    .getElementById("seconds")
-    .innerText =
-        String(
-            Math.floor(
-                distance%60000/1000
-            )
-        ).padStart(2,"0");
+// ======================================================
+// HELPERS
+// ======================================================
+
+function showStatus(
+    element,
+    message,
+    type
+){
+
+    element.textContent =
+        message;
+
+    element.className =
+        "status show " + type;
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttr(value){
+
+    return String(value)
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+// ======================================================
+// COUNTDOWN
+// ======================================================
+
+function updateCountdown(){
+
+    const target =
+        new Date(
+            "December 08, 2026 00:00:00"
+        ).getTime();
+
+
+    const now =
+        new Date().getTime();
+
+
+    const difference =
+        target - now;
+
+
+    if(difference <= 0){
+
+        document.getElementById(
+            "days"
+        ).textContent = "00";
+
+        document.getElementById(
+            "hours"
+        ).textContent = "00";
+
+        document.getElementById(
+            "minutes"
+        ).textContent = "00";
+
+        document.getElementById(
+            "seconds"
+        ).textContent = "00";
+
+        return;
+
+    }
+
+
+    const days =
+        Math.floor(
+            difference /
+            (1000*60*60*24)
+        );
+
+
+    const hours =
+        Math.floor(
+            (difference %
+            (1000*60*60*24)) /
+            (1000*60*60)
+        );
+
+
+    const minutes =
+        Math.floor(
+            (difference %
+            (1000*60*60)) /
+            (1000*60)
+        );
+
+
+    const seconds =
+        Math.floor(
+            (difference %
+            (1000*60)) /
+            1000
+        );
+
+
+    document.getElementById(
+        "days"
+    ).textContent =
+        String(days).padStart(2,"0");
+
+
+    document.getElementById(
+        "hours"
+    ).textContent =
+        String(hours).padStart(2,"0");
+
+
+    document.getElementById(
+        "minutes"
+    ).textContent =
+        String(minutes).padStart(2,"0");
+
+
+    document.getElementById(
+        "seconds"
+    ).textContent =
+        String(seconds).padStart(2,"0");
 
 }
 
@@ -2041,65 +1689,75 @@ setInterval(
 updateCountdown();
 
 
-/* TOAST */
+// ======================================================
+// THEME
+// ======================================================
 
-function showToast(message){
+window.toggleTheme = function(){
 
-    const toast =
-        document
-        .getElementById("toast");
-
-
-    toast.innerText=message;
-
-    toast.classList.add("show");
+    const light =
+        document.body.dataset.theme === "light";
 
 
-    setTimeout(
-        ()=>{
-            toast.classList.remove("show");
-        },
-        3000
-    );
+    if(light){
 
-}
+        document.body.dataset.theme =
+            "dark";
 
+        document.documentElement.style
+            .setProperty(
+                "--bg",
+                "#070914"
+            );
 
-/* INITIALIZE */
-
-(async function(){
-
-    try{
-
-        await openDatabase();
-
-        await loadPapers();
-
-        renderPapers();
+        document.documentElement.style
+            .setProperty(
+                "--card",
+                "#111827"
+            );
 
     }
-    catch(error){
+    else{
 
-        console.error(error);
+        document.body.dataset.theme =
+            "light";
 
-        showToast(
-            "Browser storage could not be opened."
-        );
+        document.documentElement.style
+            .setProperty(
+                "--bg",
+                "#f4f6fb"
+            );
+
+        document.documentElement.style
+            .setProperty(
+                "--card",
+                "#ffffff"
+            );
+
+        document.documentElement.style
+            .setProperty(
+                "--text",
+                "#111827"
+            );
+
+        document.documentElement.style
+            .setProperty(
+                "--muted",
+                "#64748b"
+            );
 
     }
 
-})();
+};
+
+
+// ======================================================
+// START
+// ======================================================
+
+loadPapers();
 
 </script>
 
-
-    }
-}
-    }
-}
-
-    }
-
-}
 </body>
 </html>
