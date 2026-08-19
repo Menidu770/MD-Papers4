@@ -2111,6 +2111,29 @@ function showToast(message){
 })();
 
 </script>
+/* ADMIN PASSWORD */
 
+function unlockAdmin(){
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    const ADMIN_PASSWORD = "d0751187471";
+
+    if(password === ADMIN_PASSWORD){
+
+        document.getElementById("adminLock").style.display = "none";
+
+        document.getElementById("adminPanel").style.display = "block";
+
+        showToast("✓ Admin access granted");
+
+    }else{
+
+        showToast("❌ Incorrect password");
+
+    }
+
+}
 </body>
 </html>
