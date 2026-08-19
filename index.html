@@ -1064,14 +1064,7 @@ footer{
 
         </div>
 
-        <input
-            id="adminPassword"
-            type="password"
-            class="input"
-            placeholder="Enter admin password"
-        >
-
-       <input
+  <input
     id="adminPassword"
     type="password"
     class="input"
@@ -1081,7 +1074,9 @@ footer{
     class="btn primary"
     style="width:100%;margin-top:12px"
     onclick="unlockAdmin()">
+
     🔓 Unlock Upload
+
 </button>
 
 
@@ -2118,7 +2113,7 @@ function showToast(message){
 function unlockAdmin(){
 
     const password =
-        document.getElementById("adminPassword").value;
+        document.getElementById("MDPapers2026").value;
 
     const ADMIN_PASSWORD = "d0751187471";
 
