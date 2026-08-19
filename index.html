@@ -1032,28 +1032,69 @@ footer{
 
 <section id="admin">
 
-    <div class="sectionHead"
-         style="text-align:center">
+    <div class="sectionHead" style="text-align:center">
 
         <h2>📤 Upload Past Paper</h2>
 
         <p>
-            Select a PDF and add it to MD Papers.
+            Only MD Papers administrator can upload PDFs.
         </p>
 
     </div>
 
+    <!-- PASSWORD LOCK -->
+    <div id="adminLock" class="adminBox">
 
-    <div class="adminBox">
+        <div style="text-align:center">
+
+            <div style="font-size:45px">🔐</div>
+
+            <h2 style="margin-top:10px">
+                MD Papers Admin
+            </h2>
+
+            <p style="
+                color:var(--muted);
+                margin:10px 0 20px;
+                font-size:12px;
+            ">
+                Enter the administrator password
+                to upload past papers.
+            </p>
+
+        </div>
+
+        <input
+            id="adminPassword"
+            type="password"
+            class="input"
+            placeholder="Enter admin password"
+        >
+
+        <button
+            class="btn primary"
+            style="width:100%;margin-top:12px"
+            onclick="unlockAdmin()">
+
+            🔓 Unlock Upload
+
+        </button>
+
+    </div>
+
+
+    <!-- UPLOAD PANEL -->
+    <div
+        id="adminPanel"
+        class="adminBox"
+        style="display:none"
+    >
 
         <div class="formGrid">
 
-
             <div class="formGroup">
 
-                <label>
-                    Paper Title
-                </label>
+                <label>Paper Title</label>
 
                 <input
                     id="paperTitle"
@@ -1065,9 +1106,7 @@ footer{
 
             <div class="formGroup">
 
-                <label>
-                    Subject
-                </label>
+                <label>Subject</label>
 
                 <select id="paperSubject">
 
@@ -1085,9 +1124,7 @@ footer{
 
             <div class="formGroup">
 
-                <label>
-                    Grade
-                </label>
+                <label>Grade</label>
 
                 <select id="paperGrade">
 
@@ -1108,9 +1145,7 @@ footer{
 
             <div class="formGroup">
 
-                <label>
-                    Year
-                </label>
+                <label>Year</label>
 
                 <input
                     id="paperYear"
@@ -1123,9 +1158,7 @@ footer{
 
             <div class="formGroup full">
 
-                <label>
-                    PDF File
-                </label>
+                <label>PDF File</label>
 
                 <div class="fileDrop">
 
@@ -1954,7 +1987,7 @@ function toggleMenu(){
 
 const examDate =
     new Date(
-        "December 08, 2026 08:00:00"
+        "December 08, 2026 00:00:00"
     ).getTime();
 
 
