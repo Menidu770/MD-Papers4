@@ -1063,14 +1063,8 @@ footer{
             </p>
 
         </div>
-
-  <input
-    id="adminPassword"
-    type="password"
-    class="input"
-    placeholder="Enter admin password">
-
-<button
+<div id="adminPanel"
+  <button
     class="btn primary"
     style="width:100%;margin-top:12px"
     onclick="unlockAdmin()">
@@ -1079,12 +1073,13 @@ footer{
 
 </button>
 
+</div>
 
-    <!-- UPLOAD PANEL -->
-    <div
-        id="adminPanel"
-        class="adminBox"
-        style="display:none"
+<!-- UPLOAD PANEL -->
+<div
+    id="adminPanel"
+    class="adminBox"
+    style="display:none">
     >
 
         <div class="formGrid">
@@ -2112,15 +2107,13 @@ function showToast(message){
 
 function unlockAdmin(){
 
-    const password =
-        document.getElementById("MDPapers2026").value;
+    const password = document.getElementById("adminPassword").value;
 
     const ADMIN_PASSWORD = "d0751187471";
 
     if(password === ADMIN_PASSWORD){
 
         document.getElementById("adminLock").style.display = "none";
-
         document.getElementById("adminPanel").style.display = "block";
 
         showToast("✓ Admin access granted");
@@ -2128,6 +2121,9 @@ function unlockAdmin(){
     }else{
 
         showToast("❌ Incorrect password");
+
+    }
+}
 
     }
 
