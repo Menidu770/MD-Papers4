@@ -1063,7 +1063,11 @@ footer{
             </p>
 
         </div>
-<div id="adminPanel"
+<input
+    id="adminPassword"
+    type="password"
+    class="input"
+    placeholder="Enter admin password">
   <button
     class="btn primary"
     style="width:100%;margin-top:12px"
@@ -2103,25 +2107,26 @@ function showToast(message){
 })();
 
 </script>
-/* ADMIN PASSWORD */
+function unlockAdmin() {
 
-function unlockAdmin(){
-
-    const password = document.getElementById("adminPassword").value;
+    const password =
+        document.getElementById("adminPassword").value;
 
     const ADMIN_PASSWORD = "d0751187471";
 
-    if(password === ADMIN_PASSWORD){
+    if (password === ADMIN_PASSWORD) {
 
         document.getElementById("adminLock").style.display = "none";
         document.getElementById("adminPanel").style.display = "block";
 
-        showToast("✓ Admin access granted");
+        alert("Admin unlocked successfully!");
 
-    }else{
+    } else {
 
-        showToast("❌ Incorrect password");
+        alert("Incorrect password!");
 
+    }
+}
     }
 }
 
