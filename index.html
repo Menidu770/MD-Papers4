@@ -1243,657 +1243,420 @@ footer{
    MD PAPERS
    LOCAL PDF DATABASE
    ========================================================= */
+const API_URL =
+"YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+
 
 let papers = [];
 
-/*
-   IndexedDB is used instead of localStorage because
-   localStorage is not suitable for storing PDF files.
-*/
 
-const DB_NAME = "MD_PAPERS_DATABASE";
-const STORE_NAME = "papers";
+async function loadPapers(){
 
-let db;
+    try{
 
+        const response =
+            await fetch(
+                API_URL + "?action=list"
+            );
 
-/* OPEN DATABASE */
+        const data =
+            await response.json();
 
-function openDatabase(){
+        if(!data.success){
 
-    return new Promise((resolve,reject)=>{
+            throw new Error(
+                data.error
+            );
+        }
 
-        const request =
-            indexedDB.open(DB_NAME,1);
+        papers =
+            data.papers || [];
 
+        renderPapers();
 
-        request.onupgradeneeded = function(e){
+    }catch(error){
 
-            const database = e.target.result;
+        console.error(error);
 
-            if(!database.objectStoreNames.contains(STORE_NAME)){
-
-                database.createObjectStore(
-                    STORE_NAME,
-                    {keyPath:"id",autoIncrement:true}
-                );
-
-            }
-
-        };
-
-
-        request.onsuccess = function(e){
-
-            db=e.target.result;
-            resolve(db);
-
-        };
-
-
-        request.onerror = function(){
-
-            reject(request.error);
-
-        };
-
-    });
-
+        showToast(
+            "Papers load failed."
+        );
+    }
 }
 
-
-/* LOAD PAPERS */
-
-function loadPapers(){
-
-    return new Promise((resolve,reject)=>{
-
-        const transaction =
-            db.transaction(
-                STORE_NAME,
-                "readonly"
-            );
-
-        const store =
-            transaction.objectStore(
-                STORE_NAME
-            );
-
-        const request =
-            store.getAll();
-
-
-        request.onsuccess=function(){
-
-            papers=request.result || [];
-
-            resolve();
-
-        };
-
-
-        request.onerror=function(){
-
-            reject(request.error);
-
-        };
-
-    });
-
-}
-
-
-/* SAVE PAPER */
-
-function savePaper(paper){
-
-    return new Promise((resolve,reject)=>{
-
-        const transaction =
-            db.transaction(
-                STORE_NAME,
-                "readwrite"
-            );
-
-        const store =
-            transaction.objectStore(
-                STORE_NAME
-            );
-
-        const request =
-            store.add(paper);
-
-
-        request.onsuccess=function(){
-
-            paper.id=request.result;
-
-            resolve(paper);
-
-        };
-
-
-        request.onerror=function(){
-
-            reject(request.error);
-
-        };
-
-    });
-
-}
-
-
-/* DELETE PAPER */
-
-function deletePaper(id){
-
-    return new Promise((resolve,reject)=>{
-
-        const transaction =
-            db.transaction(
-                STORE_NAME,
-                "readwrite"
-            );
-
-        const store =
-            transaction.objectStore(
-                STORE_NAME
-            );
-
-        const request =
-            store.delete(id);
-
-
-        request.onsuccess=resolve;
-
-        request.onerror=function(){
-
-            reject(request.error);
-
-        };
-
-    });
-
-}
-
-
-/* ADD PAPER */
 
 async function addPaper(){
 
     const title =
         document
-        .getElementById("paperTitle")
+        .getElementById(
+            "paperTitle"
+        )
         .value
         .trim();
 
 
     const subject =
         document
-        .getElementById("paperSubject")
+        .getElementById(
+            "paperSubject"
+        )
         .value;
 
 
     const grade =
         document
-        .getElementById("paperGrade")
+        .getElementById(
+            "paperGrade"
+        )
         .value;
 
 
     const year =
         document
-        .getElementById("paperYear")
+        .getElementById(
+            "paperYear"
+        )
         .value;
 
 
     const file =
         document
-        .getElementById("pdfFile")
+        .getElementById(
+            "pdfFile"
+        )
         .files[0];
 
 
     if(!title){
 
         showToast(
-            "Please enter a paper title."
+            "Paper title එක දාන්න."
         );
 
         return;
-
     }
 
 
     if(!file){
 
         showToast(
-            "Please select a PDF."
+            "PDF එක select කරන්න."
         );
 
         return;
-
     }
 
 
-    if(file.type !== "application/pdf"){
+    if(
+        file.type !==
+        "application/pdf"
+    ){
 
         showToast(
-            "Only PDF files are allowed."
+            "PDF files only."
         );
 
         return;
-
     }
 
 
-    /*
-       Convert the PDF to ArrayBuffer so IndexedDB
-       can store the actual PDF.
-    */
-
-    const buffer =
-        await file.arrayBuffer();
+    showToast(
+        "PDF upload වෙමින්..."
+    );
 
 
-    const paper={
-
-        title:title,
-
-        subject:subject,
-
-        grade:grade,
-
-        year:year,
-
-        filename:file.name,
-
-        size:file.size,
-
-        type:"application/pdf",
-
-        data:buffer,
-
-        createdAt:Date.now()
-
-    };
+    const base64 =
+        await fileToBase64(
+            file
+        );
 
 
     try{
 
-        await savePaper(paper);
+        const response =
+            await fetch(
+                API_URL,
+                {
+
+                    method:"POST",
+
+                    headers:{
+                        "Content-Type":
+                        "text/plain;charset=utf-8"
+                    },
+
+                    body:
+                    JSON.stringify({
+
+                        action:"upload",
+
+                        title:title,
+
+                        subject:subject,
+
+                        grade:grade,
+
+                        year:year,
+
+                        filename:
+                            file.name,
+
+                        fileBase64:
+                            base64
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if(!data.success){
+
+            throw new Error(
+                data.error
+            );
+        }
+
 
         document
-        .getElementById("paperTitle")
-        .value="";
+        .getElementById(
+            "paperTitle"
+        )
+        .value = "";
 
 
         document
-        .getElementById("pdfFile")
-        .value="";
+        .getElementById(
+            "pdfFile"
+        )
+        .value = "";
+
+
+        showToast(
+            "✓ Paper uploaded!"
+        );
 
 
         await loadPapers();
 
-        renderPapers();
 
-        showToast(
-            "✓ PDF uploaded successfully!"
-        );
-
-
-        document
-        .getElementById("papers")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-
-    }
-    catch(error){
+    }catch(error){
 
         console.error(error);
 
         showToast(
-            "Could not save the PDF."
+            "Upload failed."
         );
-
     }
-
 }
 
 
-/* RENDER PAPERS */
+function fileToBase64(file){
+
+    return new Promise(
+        (resolve,reject)=>{
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(){
+
+                    const result =
+                        reader.result;
+
+                    resolve(
+                        result.split(",")[1]
+                    );
+                };
+
+
+            reader.onerror =
+                reject;
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+    );
+}
+
 
 function renderPapers(){
 
     const grid =
         document
-        .getElementById("paperGrid");
+        .getElementById(
+            "paperGrid"
+        );
 
 
-    const search =
-        document
-        .getElementById("search")
-        .value
-        .toLowerCase();
+    if(!papers.length){
 
-
-    const subject =
-        document
-        .getElementById("filterSubject")
-        .value;
-
-
-    const grade =
-        document
-        .getElementById("filterGrade")
-        .value;
-
-
-    const year =
-        document
-        .getElementById("filterYear")
-        .value;
-
-
-    const filtered =
-        papers.filter(p=>{
-
-            const text =
-                (
-                    p.title+" "+
-                    p.subject+" "+
-                    p.grade+" "+
-                    p.year
-                ).toLowerCase();
-
-
-            return (
-
-                text.includes(search) &&
-
-                (!subject ||
-                 p.subject===subject) &&
-
-                (!grade ||
-                 p.grade===grade) &&
-
-                (!year ||
-                 String(p.year)===String(year))
-
-            );
-
-        });
-
-
-    if(filtered.length===0){
-
-        grid.innerHTML=`
+        grid.innerHTML = `
 
             <div class="empty">
 
-                <div style="font-size:40px">
+                <div
+                    style="font-size:40px">
                     📂
                 </div>
 
-                <h3 style="margin-top:10px">
+                <h3>
                     No papers found
                 </h3>
-
-                <p style="margin-top:6px">
-                    Upload a PDF from the Admin section.
-                </p>
 
             </div>
 
         `;
 
-    }
-    else{
-
-        grid.innerHTML =
-            filtered.map(p=>paperHTML(p))
-            .join("");
-
+        return;
     }
 
 
-    document
-    .getElementById("paperCount")
-    .innerText= papers.length;
+    grid.innerHTML =
+        papers.map(
+            paper => `
 
-}
+            <article class="paper">
 
+                <div class="paperTop">
 
-/* PAPER CARD */
+                    <div class="pdfIcon">
+                        PDF
+                    </div>
 
-function paperHTML(p){
+                    <div class="year">
+                        ${paper.year}
+                    </div>
 
-    return `
-
-        <article class="paper">
-
-            <div class="paperTop">
-
-                <div class="pdfIcon">
-                    PDF
                 </div>
 
-                <div class="year">
-                    ${escapeHTML(p.year)}
+
+                <h3>
+                    ${paper.title}
+                </h3>
+
+
+                <p>
+                    ${paper.subject}
+                    •
+                    ${paper.grade}
+                </p>
+
+
+                <div class="paperActions">
+
+                    <button
+                        onclick="
+                        viewPDF('${paper.id}')
+                        ">
+
+                        View
+
+                    </button>
+
+
+                    <button
+                        onclick="
+                        downloadPDF('${paper.id}')
+                        ">
+
+                        Download
+
+                    </button>
+
                 </div>
 
-            </div>
+            </article>
 
-
-            <h3>
-                ${escapeHTML(p.title)}
-            </h3>
-
-
-            <p>
-                ${escapeHTML(p.subject)}
-                •
-                ${escapeHTML(p.grade)}
-            </p>
-
-
-            <div class="tags">
-
-                <span class="tag">
-                    ${escapeHTML(p.subject)}
-                </span>
-
-                <span class="tag">
-                    ${escapeHTML(p.grade)}
-                </span>
-
-                <span class="tag">
-                    ${escapeHTML(p.year)}
-                </span>
-
-            </div>
-
-
-            <div class="paperActions">
-
-                <button
-                    class="view"
-                    onclick="viewPDF(${p.id})">
-
-                    View
-
-                </button>
-
-
-                <button
-                    onclick="downloadPDF(${p.id})">
-
-                    Download
-
-                </button>
-
-
-                <button
-                    class="delete"
-                    onclick="removePaper(${p.id})">
-
-                    Delete
-
-                </button>
-
-            </div>
-
-        </article>
-
-    `;
-
+        `
+        ).join("");
 }
 
-
-/* VIEW PDF */
 
 function viewPDF(id){
 
     const paper =
         papers.find(
-            p=>p.id===id
+            p => p.id === id
         );
 
 
-    if(!paper)return;
-
-
-    const blob =
-        new Blob(
-            [paper.data],
-            {type:"application/pdf"}
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
+    if(!paper)
+        return;
 
 
     document
-    .getElementById("viewerTitle")
-    .innerText=paper.title;
+    .getElementById(
+        "viewerTitle"
+    )
+    .innerText =
+        paper.title;
 
 
     document
-    .getElementById("pdfViewer")
-    .src=url;
+    .getElementById(
+        "pdfViewer"
+    )
+    .src =
+        paper.url;
 
 
     document
-    .getElementById("viewerModal")
-    .style.display="flex";
-
-
+    .getElementById(
+        "viewerModal"
+    )
+    .style.display =
+        "flex";
 }
 
-
-/* CLOSE VIEWER */
-
-function closeViewer(){
-
-    const iframe =
-        document
-        .getElementById("pdfViewer");
-
-
-    iframe.src="";
-
-
-    document
-    .getElementById("viewerModal")
-    .style.display="none";
-
-}
-
-
-/* DOWNLOAD PDF */
 
 function downloadPDF(id){
 
     const paper =
         papers.find(
-            p=>p.id===id
+            p => p.id === id
         );
 
 
-    if(!paper)return;
+    if(!paper)
+        return;
 
 
-    const blob =
-        new Blob(
-            [paper.data],
-            {type:"application/pdf"}
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-
-    const a =
-        document.createElement("a");
-
-
-    a.href=url;
-
-    a.download =
-        paper.filename ||
-        paper.title+".pdf";
-
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    a.remove();
-
-
-    setTimeout(
-        ()=>URL.revokeObjectURL(url),
-        1000
+    window.open(
+        paper.url,
+        "_blank"
     );
-
 }
 
 
-/* DELETE */
+function closeViewer(){
 
-async function removePaper(id){
-
-    const paper =
-        papers.find(
-            p=>p.id===id
-        );
-
-
-    if(!paper)return;
+    document
+    .getElementById(
+        "pdfViewer"
+    )
+    .src = "";
 
 
-    const yes =
-        confirm(
-            "Delete this paper?\n\n"+
-            paper.title
-        );
+    document
+    .getElementById(
+        "viewerModal"
+    )
+    .style.display =
+        "none";
+}
 
 
-    if(!yes)return;
-
-
-    await deletePaper(id);
-
-    await loadPapers();
-
-    renderPapers();
-
-    showToast(
-        "Paper deleted."
-    );
-
+loadPapers();
 }
 
 
