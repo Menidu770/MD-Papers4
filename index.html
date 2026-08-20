@@ -1247,7 +1247,295 @@ const API_URL =
 "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
 
 
+let papers = [];
 
+
+/* ================================
+   LOAD PAPERS
+================================ */
+
+async function loadPapers() {
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL + "?action=list"
+            );
+
+        const data =
+            await response.json();
+
+        if (!data.success) {
+
+            throw new Error(
+                data.error
+            );
+        }
+
+        papers =
+            data.papers || [];
+
+        displayPapers();
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Papers load කරන්න බැරි වුණා."
+        );
+    }
+}
+
+
+/* ================================
+   UPLOAD PDF
+================================ */
+
+async function addPaper() {
+
+    const title =
+        document
+        .getElementById("paperTitle")
+        .value
+        .trim();
+
+
+    const subject =
+        document
+        .getElementById("paperSubject")
+        .value;
+
+
+    const grade =
+        document
+        .getElementById("paperGrade")
+        .value;
+
+
+    const year =
+        document
+        .getElementById("paperYear")
+        .value;
+
+
+    const file =
+        document
+        .getElementById("pdfFile")
+        .files[0];
+
+
+    if (!title) {
+
+        showToast(
+            "Paper name එක දාන්න."
+        );
+
+        return;
+    }
+
+
+    if (!file) {
+
+        showToast(
+            "PDF එක select කරන්න."
+        );
+
+        return;
+    }
+
+
+    if (
+        file.type !==
+        "application/pdf"
+    ) {
+
+        showToast(
+            "PDF file එකක් තෝරන්න."
+        );
+
+        return;
+    }
+
+
+    try {
+
+        showToast(
+            "PDF upload වෙමින්..."
+        );
+
+
+        const base64 =
+            await convertToBase64(
+                file
+            );
+
+
+        const response =
+            await fetch(
+                API_URL,
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                        "text/plain"
+                    },
+
+                    body:
+                    JSON.stringify({
+
+                        action:
+                        "upload",
+
+                        title:
+                        title,
+
+                        subject:
+                        subject,
+
+                        grade:
+                        grade,
+
+                        year:
+                        year,
+
+                        filename:
+                        file.name,
+
+                        fileBase64:
+                        base64
+
+                    })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!result.success) {
+
+            throw new Error(
+                result.error
+            );
+        }
+
+
+        showToast(
+            "✓ PDF uploaded!"
+        );
+
+
+        document
+        .getElementById(
+            "paperTitle"
+        )
+        .value = "";
+
+
+        document
+        .getElementById(
+            "pdfFile"
+        )
+        .value = "";
+
+
+        /*
+          Reload papers from
+          Google Sheets.
+        */
+
+        await loadPapers();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Upload failed."
+        );
+    }
+}
+
+
+/* ================================
+   CONVERT PDF TO BASE64
+================================ */
+
+function convertToBase64(file) {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function () {
+
+                    const result =
+                        reader.result;
+
+
+                    const base64 =
+                        result
+                        .split(",")[1];
+
+
+                    resolve(
+                        base64
+                    );
+                };
+
+
+            reader.onerror =
+                reject;
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+    );
+}
+
+
+/* ================================
+   DISPLAY PAPERS
+================================ */
+
+function displayPapers() {
+
+    const grid =
+        document
+        .getElementById(
+            "paperGrid"
+        );
+
+
+    if (
+        !papers ||
+        papers.length === 0
+    ) {
+
+        grid.innerHTML = `
+
+            <div class="empty">
+
+                <div
+                    style="font-size:40px">
+
+                    📂
+
+                </div>
 
                 <h3>
                     No papers found
@@ -1262,7 +1550,8 @@ const API_URL =
 
 
     grid.innerHTML =
-        papers.map(
+        papers
+        .map(
             paper => `
 
             <article class="paper">
@@ -1286,15 +1575,21 @@ const API_URL =
 
 
                 <p>
+
                     ${paper.subject}
+
                     •
+
                     ${paper.grade}
+
                 </p>
 
 
-                <div class="paperActions">
+                <div
+                    class="paperActions">
 
                     <button
+                        class="view"
                         onclick="
                         viewPDF('${paper.id}')
                         ">
@@ -1318,20 +1613,29 @@ const API_URL =
             </article>
 
         `
-        ).join("");
+        )
+        .join("");
 }
 
 
-function viewPDF(id){
+/* ================================
+   VIEW PDF
+================================ */
+
+function viewPDF(id) {
 
     const paper =
         papers.find(
-            p => p.id === id
+            p =>
+            String(p.id) ===
+            String(id)
         );
 
 
-    if(!paper)
+    if (!paper) {
+
         return;
+    }
 
 
     document
@@ -1359,16 +1663,24 @@ function viewPDF(id){
 }
 
 
-function downloadPDF(id){
+/* ================================
+   DOWNLOAD PDF
+================================ */
+
+function downloadPDF(id) {
 
     const paper =
         papers.find(
-            p => p.id === id
+            p =>
+            String(p.id) ===
+            String(id)
         );
 
 
-    if(!paper)
+    if (!paper) {
+
         return;
+    }
 
 
     window.open(
@@ -1378,7 +1690,11 @@ function downloadPDF(id){
 }
 
 
-function closeViewer(){
+/* ================================
+   CLOSE PDF
+================================ */
+
+function closeViewer() {
 
     document
     .getElementById(
@@ -1396,118 +1712,11 @@ function closeViewer(){
 }
 
 
+/* ================================
+   START
+================================ */
+
 loadPapers();
-}
-
-
-/* ESCAPE HTML */
-
-function escapeHTML(value){
-
-    return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
-
-
-/* DARK MODE */
-
-function toggleDark(){
-
-    document
-    .body
-    .classList
-    .toggle("dark");
-
-
-    localStorage.setItem(
-        "mdDark",
-        document
-        .body
-        .classList
-        .contains("dark")
-    );
-
-}
-
-
-if(
-    localStorage.getItem("mdDark")
-    ==="true"
-){
-
-    document
-    .body
-    .classList
-    .add("dark");
-
-}
-
-
-/* MOBILE MENU */
-
-function toggleMenu(){
-
-    document
-    .getElementById("navlinks")
-    .classList
-    .toggle("active");
-
-}
-
-
-/* COUNTDOWN */
-
-const examDate =
-    new Date(
-        "December 08, 2026 08:00:00"
-    ).getTime();
-
-
-function updateCountdown(){
-
-    const distance =
-        examDate-Date.now();
-
-
-    if(distance<=0){
-
-        ["days","hours","minutes","seconds"]
-        .forEach(id=>{
-            document
-            .getElementById(id)
-            .innerText="00";
-        });
-
-        return;
-
-    }
-
-
-    document
-    .getElementById("days")
-    .innerText =
-        String(
-            Math.floor(
-                distance/86400000
-            )
-        ).padStart(2,"0");
-
-
-    document
-    .getElementById("hours")
-    .innerText =
-        String(
-            Math.floor(
-                distance%86400000/3600000
-            )
-        ).padStart(2,"0");
-
-
     document
     .getElementById("minutes")
     .innerText =
